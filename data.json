@@ -1,25 +1,13 @@
 {
-    "last_updated": "2026-04-11 05:08:52",
+    "last_updated": "2026-04-11 05:12:57",
     "trending": [
         {
-            "label": "Box Office",
-            "value": "Dune: Part Two"
+            "label": "iTunes #1",
+            "value": "Data Unavailable"
         },
         {
-            "label": "Billboard Hot 100",
-            "value": "Texas Hold 'Em"
-        },
-        {
-            "label": "Netflix TV",
-            "value": "3 Body Problem"
-        },
-        {
-            "label": "NYT Fiction",
-            "value": "The Women"
-        },
-        {
-            "label": "Spotify Global",
-            "value": "Beautiful Things"
+            "label": "NYT Books",
+            "value": "Martin Amis: An Appreciation"
         }
     ],
     "categories": [
@@ -158,7 +146,7 @@
                 },
                 {
                     "name": "Current Bitcoin Price",
-                    "value": "$72,831.89",
+                    "value": "$72,799.98",
                     "source": "Blockchain.info"
                 },
                 {
