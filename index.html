@@ -23,13 +23,11 @@ header { border-bottom: 1.5px solid var(--text); padding: 0 32px; display: flex;
 .header-meta { display: flex; align-items: center; gap: 32px; padding: 18px 0; padding-left: 28px; flex: 1; }
 .meta-item { font-family: var(--mono); font-size: 10px; color: var(--text-muted); letter-spacing: 0.05em; text-transform: uppercase; }
 .meta-item span { display: block; color: var(--text); font-weight: 500; margin-top: 2px; }
-#refresh-btn { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; background: var(--text); color: var(--bg); border: none; padding: 8px 16px; cursor: pointer; transition: opacity 0.15s; align-self: center; white-space: nowrap; }
-#refresh-btn:hover { opacity: 0.75; } #refresh-btn:disabled { opacity: 0.35; cursor: not-allowed; }
 
 /* TICKER */
 .ticker-wrap { overflow: hidden; height: 30px; display: flex; align-items: center; background: var(--text); color: var(--bg); }
 .ticker-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; padding: 0 14px; border-right: 1px solid rgba(255,255,255,0.15); white-space: nowrap; flex-shrink: 0; opacity: 0.7; }
-.ticker-track { display: flex; animation: ticker 60s linear infinite; white-space: nowrap; }
+.ticker-track { display: flex; animation: ticker 40s linear infinite; white-space: nowrap; }
 .ticker-item { font-family: var(--mono); font-size: 10px; padding: 0 24px; letter-spacing: 0.03em; }
 .ticker-item .tlabel { opacity: 0.45; margin-right: 5px; font-size: 9px; }
 @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
@@ -40,20 +38,18 @@ main { padding: 28px 32px; max-width: 1500px; margin: 0 auto; }
 .section-header { display: flex; align-items: baseline; gap: 14px; margin-bottom: 14px; padding-bottom: 7px; border-bottom: 1px solid var(--border); margin-top: 36px; }
 .section-header:first-of-type { margin-top: 0; }
 .section-title { font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; }
-.section-meta { font-family: var(--mono); font-size: 9px; color: var(--text-muted); letter-spacing: 0.03em; text-transform: uppercase;}
+.section-meta { font-family: var(--mono); font-size: 9px; color: var(--text-muted); letter-spacing: 0.03em; }
+.section-sources { font-family: var(--mono); font-size: 8px; color: var(--text-muted); letter-spacing: 0.04em; margin-left: auto; opacity: 0.6; text-transform: uppercase; }
 
 /* GRID */
 .grid { display: grid; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 4px; }
-.g1 { grid-template-columns: repeat(1, 1fr); }
-.g2 { grid-template-columns: repeat(2, 1fr); }
-.g3 { grid-template-columns: repeat(3, 1fr); }
 .g4 { grid-template-columns: repeat(4, 1fr); }
 .g5 { grid-template-columns: repeat(5, 1fr); }
-.g6 { grid-template-columns: repeat(6, 1fr); }
 
-.card { background: var(--surface); padding: 18px 20px 16px; position: relative; min-height: 86px; }
+.card { background: var(--surface); padding: 18px 20px 16px; position: relative; min-height: 86px; display: flex; flex-direction: column; }
 .card-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 9px; line-height: 1.4; }
 .card-value { font-family: var(--mono); font-size: 20px; font-weight: 400; letter-spacing: -0.01em; line-height: 1; margin-bottom: 5px; }
+.card-source { font-family: var(--mono); font-size: 8px; color: var(--text-muted); opacity: 0.45; text-transform: uppercase; letter-spacing: 0.06em; margin-top: auto; padding-top: 12px; }
 
 /* FOOTER */
 footer { border-top: 1.5px solid var(--text); padding: 18px 32px; display: flex; align-items: center; justify-content: space-between; margin-top: 36px; }
@@ -65,10 +61,9 @@ footer { border-top: 1.5px solid var(--text); padding: 18px 32px; display: flex;
 .dot.error { background: var(--red); }
 
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.25} }
-
-@media(max-width:1100px){ .g5,.g6{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(2,1fr)} }
-@media(max-width:700px){ .g5,.g6,.g4,.g3{grid-template-columns:repeat(2,1fr)} main{padding:20px} header{padding:0 20px;flex-wrap:wrap} }
-@media(max-width:480px){ .g5,.g6,.g4,.g3,.g2{grid-template-columns:1fr} }
+@media(max-width:1100px){ .g5{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(2,1fr)} }
+@media(max-width:700px){ .g5,.g4{grid-template-columns:repeat(2,1fr)} main{padding:20px} header{padding:0 20px;flex-wrap:wrap} .section-sources{display:none} }
+@media(max-width:480px){ .g5,.g4{grid-template-columns:1fr} }
 </style>
 </head>
 <body>
@@ -87,14 +82,9 @@ footer { border-top: 1.5px solid var(--text); padding: 18px 32px; display: flex;
 </header>
 
 <div class="ticker-wrap">
-  <div class="ticker-label">System Status</div>
+  <div class="ticker-label">Currently #1</div>
   <div style="overflow:hidden;flex:1"><div class="ticker-track" id="ticker-track">
-    <span class="ticker-item"><span class="tlabel">Pipeline</span>Automated Data Fetch Active</span>
-    <span class="ticker-item"><span class="tlabel">Hosting</span>Vercel Edge Network</span>
-    <span class="ticker-item"><span class="tlabel">Security</span>Zero Exposed API Keys</span>
-    <span class="ticker-item"><span class="tlabel">Pipeline</span>Automated Data Fetch Active</span>
-    <span class="ticker-item"><span class="tlabel">Hosting</span>Vercel Edge Network</span>
-    <span class="ticker-item"><span class="tlabel">Security</span>Zero Exposed API Keys</span>
+    <span class="ticker-item">Awaiting live trend data...</span>
   </div></div>
 </div>
 
@@ -105,8 +95,8 @@ footer { border-top: 1.5px solid var(--text); padding: 18px 32px; display: flex;
 </main>
 
 <footer>
-  <div class="footer-note">Data compiled daily via automated GitHub Actions pipeline.</div>
-  <div id="status"><div class="dot loading" id="status-dot"></div><span id="status-text">Fetching data.json...</span></div>
+  <div class="footer-note">All figures are averages, medians, or statistical means. Pipeline automated daily.</div>
+  <div id="status"><div class="dot loading" id="status-dot"></div><span id="status-text">Fetching data...</span></div>
 </footer>
 
 <script>
@@ -117,48 +107,51 @@ function renderData() {
             return response.json();
         })
         .then(data => {
-            // Update Header Meta
+            // Header Stats
             const dateObj = new Date(data.last_updated);
             document.getElementById('hdr-date').textContent = dateObj.toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
             document.getElementById('hdr-time').textContent = dateObj.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
-            document.getElementById('hdr-pts').textContent = data.data.length;
-
-            // Group data by Category
-            const categories = {};
-            data.data.forEach(item => {
-                if (!categories[item.category]) categories[item.category] = [];
-                categories[item.category].push(item);
-            });
+            document.getElementById('hdr-cats').textContent = data.categories.length;
             
-            document.getElementById('hdr-cats').textContent = Object.keys(categories).length;
+            let totalPoints = 0;
+            data.categories.forEach(cat => totalPoints += cat.items.length);
+            document.getElementById('hdr-pts').textContent = totalPoints;
+
+            // Render Ticker
+            if (data.trending && data.trending.length > 0) {
+                // Double the items so the CSS marquee animation loops seamlessly
+                const tickerItems = [...data.trending, ...data.trending, ...data.trending]; 
+                document.getElementById('ticker-track').innerHTML = tickerItems.map(item => `
+                    <span class="ticker-item"><span class="tlabel">${item.label}</span>${item.value}</span>
+                `).join('');
+            }
 
             // Render Grids
             const mainContent = document.getElementById('main-content');
-            mainContent.innerHTML = ''; // Clear loading message
+            mainContent.innerHTML = ''; 
 
-            for (const [catName, items] of Object.entries(categories)) {
-                // Determine layout class based on number of items (max 6 columns)
-                let numCols = Math.min(items.length, 6);
-                if (numCols === 0) numCols = 1;
+            data.categories.forEach(category => {
+                let numCols = category.items.length === 4 ? 4 : 5; // Matches g4 or g5 classes from original CSS
                 
                 const sectionHTML = `
                     <div class="section-header">
-                      <div class="section-title">${catName}</div>
-                      <div class="section-meta">Automated Fetch</div>
+                      <div class="section-title">${category.title}</div>
+                      <div class="section-meta">${category.meta}</div>
+                      <div class="section-sources">${category.sources}</div>
                     </div>
                     <div class="grid g${numCols}">
-                        ${items.map(item => `
+                        ${category.items.map(item => `
                             <div class="card">
                                 <div class="card-label">${item.name}</div>
                                 <div class="card-value">${item.value}</div>
+                                <div class="card-source">${item.source}</div>
                             </div>
                         `).join('')}
                     </div>
                 `;
                 mainContent.insertAdjacentHTML('beforeend', sectionHTML);
-            }
+            });
 
-            // Update Status
             document.getElementById('status-dot').className = 'dot done';
             document.getElementById('status-text').textContent = 'Live data loaded';
         })
@@ -166,15 +159,9 @@ function renderData() {
             console.error('Error:', error);
             document.getElementById('status-dot').className = 'dot error';
             document.getElementById('status-text').textContent = 'Error loading data';
-            document.getElementById('main-content').innerHTML = `
-                <div style="padding: 40px; color: var(--red); font-family: var(--mono); font-size: 12px; border: 1px solid var(--red); background: #fff0f0;">
-                    Unable to load data.json. Check GitHub Actions pipeline.
-                </div>
-            `;
         });
 }
 
-// Initialize
 renderData();
 </script>
 </body>
