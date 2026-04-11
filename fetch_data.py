@@ -1,8 +1,40 @@
 import json
 import urllib.request
+import xml.etree.ElementTree as ET
 from datetime import datetime
 
-# 1. Fetch live data (Bitcoin as an example of dynamic data)
+# --- 1. LIVE TICKER DATA FETCHING ---
+trending_data = []
+
+# Fetch #1 iTunes Song (using Apple's public RSS feed)
+try:
+    url = "https://itunes.apple.com/us/rss/topsongs/limit=1/json"
+    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+    response = urllib.request.urlopen(req)
+    data = json.loads(response.read())
+    entry = data['feed']['entry'][0]
+    song_name = entry['im:name']['label']
+    artist = entry['im:artist']['label']
+    trending_data.append({"label": f"iTunes #1 - {artist}", "value": song_name})
+except:
+    trending_data.append({"label": "iTunes #1", "value": "Data Unavailable"})
+
+# Fetch #1 NYT Fiction Bestseller (using NYT public RSS)
+try:
+    url = "https://rss.nytimes.com/services/xml/rss/nyt/Books.xml"
+    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+    response = urllib.request.urlopen(req)
+    xml_data = response.read()
+    root = ET.fromstring(xml_data)
+    # The first item is usually the top review or list update
+    top_book = root.find('.//item/title').text.replace("Review: ", "")
+    trending_data.append({"label": "NYT Books", "value": top_book})
+except:
+    trending_data.append({"label": "NYT Books", "value": "Data Unavailable"})
+
+
+# --- 2. LIVE CATEGORY DATA FETCHING ---
+# Fetch Live Bitcoin Price
 try:
     url = "https://blockchain.info/ticker"
     req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
@@ -12,16 +44,10 @@ try:
 except:
     btc_price = "API Offline"
 
-# 2. Build the massive data dictionary
+# --- 3. BUILD THE DATABASE STRUCTURE ---
 website_data = {
     "last_updated": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-    "trending": [
-        {"label": "Box Office", "value": "Dune: Part Two"},
-        {"label": "Billboard Hot 100", "value": "Texas Hold 'Em"},
-        {"label": "Netflix TV", "value": "3 Body Problem"},
-        {"label": "NYT Fiction", "value": "The Women"},
-        {"label": "Spotify Global", "value": "Beautiful Things"}
-    ],
+    "trending": trending_data, # <--- This now uses our live fetched data
     "categories": [
         {
             "title": "Wages & Income",
@@ -85,6 +111,6 @@ website_data = {
     ]
 }
 
-# 3. Save it to data.json
+# --- 4. SAVE TO JSON ---
 with open('data.json', 'w') as f:
     json.dump(website_data, f, indent=4)
