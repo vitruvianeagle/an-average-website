@@ -88,4 +88,94 @@ footer { border-top: 1.5px solid var(--text); padding: 18px 32px; display: flex;
 
 <div class="ticker-wrap">
   <div class="ticker-label">System Status</div>
-  <div style="overflow:hidden;flex:1"><div class="ticker-track"
+  <div style="overflow:hidden;flex:1"><div class="ticker-track" id="ticker-track">
+    <span class="ticker-item"><span class="tlabel">Pipeline</span>Automated Data Fetch Active</span>
+    <span class="ticker-item"><span class="tlabel">Hosting</span>Vercel Edge Network</span>
+    <span class="ticker-item"><span class="tlabel">Security</span>Zero Exposed API Keys</span>
+    <span class="ticker-item"><span class="tlabel">Pipeline</span>Automated Data Fetch Active</span>
+    <span class="ticker-item"><span class="tlabel">Hosting</span>Vercel Edge Network</span>
+    <span class="ticker-item"><span class="tlabel">Security</span>Zero Exposed API Keys</span>
+  </div></div>
+</div>
+
+<main id="main-content">
+    <div style="padding: 40px; font-family: var(--mono); font-size: 12px; color: var(--text-muted);">
+        Awaiting automated data payload...
+    </div>
+</main>
+
+<footer>
+  <div class="footer-note">Data compiled daily via automated GitHub Actions pipeline.</div>
+  <div id="status"><div class="dot loading" id="status-dot"></div><span id="status-text">Fetching data.json...</span></div>
+</footer>
+
+<script>
+function renderData() {
+    fetch('data.json')
+        .then(response => {
+            if (!response.ok) throw new Error('Failed to load data file');
+            return response.json();
+        })
+        .then(data => {
+            // Update Header Meta
+            const dateObj = new Date(data.last_updated);
+            document.getElementById('hdr-date').textContent = dateObj.toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
+            document.getElementById('hdr-time').textContent = dateObj.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+            document.getElementById('hdr-pts').textContent = data.data.length;
+
+            // Group data by Category
+            const categories = {};
+            data.data.forEach(item => {
+                if (!categories[item.category]) categories[item.category] = [];
+                categories[item.category].push(item);
+            });
+            
+            document.getElementById('hdr-cats').textContent = Object.keys(categories).length;
+
+            // Render Grids
+            const mainContent = document.getElementById('main-content');
+            mainContent.innerHTML = ''; // Clear loading message
+
+            for (const [catName, items] of Object.entries(categories)) {
+                // Determine layout class based on number of items (max 6 columns)
+                let numCols = Math.min(items.length, 6);
+                if (numCols === 0) numCols = 1;
+                
+                const sectionHTML = `
+                    <div class="section-header">
+                      <div class="section-title">${catName}</div>
+                      <div class="section-meta">Automated Fetch</div>
+                    </div>
+                    <div class="grid g${numCols}">
+                        ${items.map(item => `
+                            <div class="card">
+                                <div class="card-label">${item.name}</div>
+                                <div class="card-value">${item.value}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                mainContent.insertAdjacentHTML('beforeend', sectionHTML);
+            }
+
+            // Update Status
+            document.getElementById('status-dot').className = 'dot done';
+            document.getElementById('status-text').textContent = 'Live data loaded';
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('status-dot').className = 'dot error';
+            document.getElementById('status-text').textContent = 'Error loading data';
+            document.getElementById('main-content').innerHTML = `
+                <div style="padding: 40px; color: var(--red); font-family: var(--mono); font-size: 12px; border: 1px solid var(--red); background: #fff0f0;">
+                    Unable to load data.json. Check GitHub Actions pipeline.
+                </div>
+            `;
+        });
+}
+
+// Initialize
+renderData();
+</script>
+</body>
+</html>
