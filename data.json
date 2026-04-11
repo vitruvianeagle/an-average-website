@@ -1,15 +1,182 @@
 {
-    "last_updated": "2026-04-11 04:50:48",
-    "data": [
+    "last_updated": "2026-04-11 05:08:52",
+    "trending": [
         {
-            "category": "Finance",
-            "name": "Average Bitcoin Price",
-            "value": "$72,818.57"
+            "label": "Box Office",
+            "value": "Dune: Part Two"
         },
         {
-            "category": "Environment",
-            "name": "Global Sea Level Rise",
-            "value": "3.4 mm/year (Static)"
+            "label": "Billboard Hot 100",
+            "value": "Texas Hold 'Em"
+        },
+        {
+            "label": "Netflix TV",
+            "value": "3 Body Problem"
+        },
+        {
+            "label": "NYT Fiction",
+            "value": "The Women"
+        },
+        {
+            "label": "Spotify Global",
+            "value": "Beautiful Things"
+        }
+    ],
+    "categories": [
+        {
+            "title": "Wages & Income",
+            "meta": "US averages, most recent period",
+            "sources": "BLS \u00b7 Federal Reserve \u00b7 Census Bureau",
+            "items": [
+                {
+                    "name": "Median Household Income",
+                    "value": "$80,610",
+                    "source": "Census Bureau"
+                },
+                {
+                    "name": "Avg Hourly Earnings",
+                    "value": "$34.28",
+                    "source": "BLS"
+                },
+                {
+                    "name": "Avg Weekly Earnings",
+                    "value": "$1,170",
+                    "source": "BLS"
+                },
+                {
+                    "name": "Avg CEO-to-Worker Pay Ratio",
+                    "value": "344:1",
+                    "source": "EPI"
+                },
+                {
+                    "name": "Avg Household Net Worth",
+                    "value": "$1.06M",
+                    "source": "Federal Reserve"
+                }
+            ]
+        },
+        {
+            "title": "Housing",
+            "meta": "US averages",
+            "sources": "NAR \u00b7 Census \u00b7 Freddie Mac \u00b7 Harvard JCHS",
+            "items": [
+                {
+                    "name": "Median Home Sale Price",
+                    "value": "$384,500",
+                    "source": "NAR"
+                },
+                {
+                    "name": "Avg 30-Yr Mortgage Rate",
+                    "value": "6.8%",
+                    "source": "Freddie Mac"
+                },
+                {
+                    "name": "Avg Monthly Rent (1BR)",
+                    "value": "$1,510",
+                    "source": "Census / Zillow"
+                },
+                {
+                    "name": "Avg Home Size (sq ft)",
+                    "value": "2,299",
+                    "source": "Census Bureau"
+                },
+                {
+                    "name": "Avg Years to Save Down Payment",
+                    "value": "11.5",
+                    "source": "Harvard JCHS"
+                }
+            ]
+        },
+        {
+            "title": "Health & Medicine",
+            "meta": "US & global averages",
+            "sources": "CDC \u00b7 WHO \u00b7 Kaiser Family Foundation",
+            "items": [
+                {
+                    "name": "US Life Expectancy",
+                    "value": "77.5 yrs",
+                    "source": "CDC / NCHS"
+                },
+                {
+                    "name": "Avg Annual Healthcare Cost",
+                    "value": "$13,493",
+                    "source": "CMS"
+                },
+                {
+                    "name": "Avg Employer Health Premium",
+                    "value": "$23,968",
+                    "source": "KFF"
+                },
+                {
+                    "name": "Avg Nightly Sleep (US Adults)",
+                    "value": "6.8 hrs",
+                    "source": "CDC / Gallup"
+                },
+                {
+                    "name": "Avg BMI (US Adults)",
+                    "value": "29.6",
+                    "source": "CDC / NHANES"
+                }
+            ]
+        },
+        {
+            "title": "Education",
+            "meta": "US averages",
+            "sources": "NCES \u00b7 College Board \u00b7 Fed Reserve",
+            "items": [
+                {
+                    "name": "Avg Student Loan Debt",
+                    "value": "$37,574",
+                    "source": "Federal Reserve"
+                },
+                {
+                    "name": "Avg Public College Tuition",
+                    "value": "$11,260",
+                    "source": "College Board"
+                },
+                {
+                    "name": "Avg Private College Tuition",
+                    "value": "$41,540",
+                    "source": "College Board"
+                },
+                {
+                    "name": "Avg K-12 Per-Pupil Spending",
+                    "value": "$14,347",
+                    "source": "NCES"
+                }
+            ]
+        },
+        {
+            "title": "Finance & Markets",
+            "meta": "Historical and current averages",
+            "sources": "Federal Reserve \u00b7 S&P Global \u00b7 BLS",
+            "items": [
+                {
+                    "name": "S&P 500 Historical Avg Return",
+                    "value": "10.5%",
+                    "source": "S&P Global"
+                },
+                {
+                    "name": "Current Bitcoin Price",
+                    "value": "$72,831.89",
+                    "source": "Blockchain.info"
+                },
+                {
+                    "name": "Avg US Credit Card APR",
+                    "value": "21.6%",
+                    "source": "Federal Reserve"
+                },
+                {
+                    "name": "Avg US Credit Card Debt",
+                    "value": "$6,501",
+                    "source": "Federal Reserve"
+                },
+                {
+                    "name": "US Avg Personal Savings Rate",
+                    "value": "3.8%",
+                    "source": "BEA"
+                }
+            ]
         }
     ]
 }
