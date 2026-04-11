@@ -2,18 +2,22 @@ name: Daily Data Update
 
 on:
   schedule:
-    - cron: "0 0 * * *" # Runs at midnight UTC every day
-  workflow_dispatch: # Allows you to trigger it manually via a button
+    - cron: "0 0 * * *" 
+  workflow_dispatch: 
+
+# This new block gives your automation permission to save the JSON file
+permissions:
+  contents: write 
 
 jobs:
   update-data:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4 # Updated to v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5 # Updated to v5
         with:
           python-version: '3.10'
 
