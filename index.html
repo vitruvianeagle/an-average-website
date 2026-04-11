@@ -1,1 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>An Average Website</title>
+    <style>
+        body { font-family: sans-serif; padding: 2rem; max-width: 800px; margin: auto; }
+        .data-point { border-bottom: 1px solid #ccc; padding: 1rem 0; display: flex; justify-content: space-between; }
+        .category { font-weight: bold; color: #555; }
+    </style>
+</head>
+<body>
+    <h1>An Average Website</h1>
+    <p>Last Updated: <span id="timestamp">Loading...</span></p>
+    
+    <div id="content">Loading data...</div>
 
+    <script>
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('timestamp').innerText = data.last_updated;
+                const container = document.getElementById('content');
+                container.innerHTML = ''; 
+                
+                data.data.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'data-point';
+                    div.innerHTML = `<div><span class="category">${item.category}</span><br>${item.name}</div> <strong>${item.value}</strong>`;
+                    container.appendChild(div);
+                });
+            })
+            .catch(error => document.getElementById('content').innerText = "Error loading data.");
+    </script>
+</body>
+</html>
