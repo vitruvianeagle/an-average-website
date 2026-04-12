@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-12T02:20:45Z",
+  "last_updated": "2026-04-12T06:10:44Z",
   "trending": [
     {
       "label": "Billboard #1",
@@ -18,7 +18,7 @@
     },
     {
       "label": "Google Trending #1",
-      "value": "cardinals",
+      "value": "paulina rubio",
       "url": "https://trends.google.com/trending?geo=US"
     }
   ],
@@ -110,7 +110,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$71,874.67",
+          "value": "$71,750.75",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
