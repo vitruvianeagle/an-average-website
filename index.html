@@ -7,13 +7,36 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
 :root {
-  --bg: #f5f4f0; --surface: #ffffff; --border: #d8d6cf;
-  --text: #1a1917; --text-muted: #7a7870;
-  --mono: 'IBM Plex Mono', monospace; --sans: 'IBM Plex Sans', sans-serif;
-  --red: #9b2226; --green: #2d6a4f; --amber: #c77b00;
+  --bg: #f5f4f0;
+  --surface: #ffffff;
+  --border: #d8d6cf;
+  --text: #1a1917;
+  --text-muted: #7a7870;
+  --ticker-bg: #1a1917;
+  --ticker-text: #f5f4f0;
+  --mono: 'IBM Plex Mono', monospace;
+  --sans: 'IBM Plex Sans', sans-serif;
+  --red: #9b2226;
+  --green: #2d6a4f;
+  --amber: #c77b00;
 }
-html, body { background: var(--bg); color: var(--text); font-family: var(--sans); font-weight: 300; min-height: 100vh; }
+
+[data-theme="dark"] {
+  --bg: #121210;
+  --surface: #1a1917;
+  --border: #2a2926;
+  --text: #e8e6e0;
+  --text-muted: #8a8880;
+  --ticker-bg: #e8e6e0;
+  --ticker-text: #121210;
+  --red: #e85f5f;
+  --green: #4ade80;
+  --amber: #fbbf24;
+}
+
+html, body { background: var(--bg); color: var(--text); font-family: var(--sans); font-weight: 300; min-height: 100vh; transition: background 0.3s ease, color 0.3s ease; }
 
 /* HEADER */
 header { border-bottom: 1.5px solid var(--text); padding: 0 32px; display: flex; align-items: stretch; justify-content: space-between; background: var(--bg); position: sticky; top: 0; z-index: 100; }
@@ -24,15 +47,32 @@ header { border-bottom: 1.5px solid var(--text); padding: 0 32px; display: flex;
 .meta-item { font-family: var(--mono); font-size: 10px; color: var(--text-muted); letter-spacing: 0.05em; text-transform: uppercase; }
 .meta-item span { display: block; color: var(--text); font-weight: 500; margin-top: 2px; }
 
+/* THEME TOGGLE */
+.theme-toggle { 
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  padding: 0 20px;
+  border-left: 1px solid var(--border);
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+.theme-toggle:hover { opacity: 0.7; }
+.theme-toggle svg { width: 18px; height: 18px; stroke: var(--text); fill: none; stroke-width: 1.5; }
+.theme-toggle .sun-icon { display: none; }
+.theme-toggle .moon-icon { display: block; }
+[data-theme="dark"] .theme-toggle .sun-icon { display: block; }
+[data-theme="dark"] .theme-toggle .moon-icon { display: none; }
+
 /* TICKER */
-.ticker-wrap { overflow: hidden; height: 32px; display: flex; align-items: center; background: var(--text); color: var(--bg); }
-.ticker-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; padding: 0 14px; border-right: 1px solid rgba(255,255,255,0.15); white-space: nowrap; flex-shrink: 0; opacity: 0.7; }
+.ticker-wrap { overflow: hidden; height: 32px; display: flex; align-items: center; background: var(--ticker-bg); color: var(--ticker-text); }
+.ticker-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; padding: 0 14px; border-right: 1px solid rgba(128,128,128,0.25); white-space: nowrap; flex-shrink: 0; opacity: 0.7; }
 .ticker-track { display: flex; animation: ticker 50s linear infinite; white-space: nowrap; }
 .ticker-track:hover { animation-play-state: paused; }
 .ticker-item { font-family: var(--mono); font-size: 10px; padding: 0 28px; letter-spacing: 0.03em; display: flex; align-items: center; gap: 6px; }
 .ticker-item .tlabel { opacity: 0.5; font-size: 9px; text-transform: uppercase; letter-spacing: 0.06em; }
-.ticker-item a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.25); }
-.ticker-item a:hover { border-bottom-color: rgba(255,255,255,0.6); }
+.ticker-item a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(128,128,128,0.35); }
+.ticker-item a:hover { border-bottom-color: currentColor; }
 .ticker-sep { opacity: 0.2; padding: 0 8px; }
 @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
@@ -50,7 +90,7 @@ main { padding: 28px 32px; max-width: 1500px; margin: 0 auto; }
 .g4 { grid-template-columns: repeat(4, 1fr); }
 .g5 { grid-template-columns: repeat(5, 1fr); }
 
-.card { background: var(--surface); padding: 18px 20px 16px; position: relative; min-height: 90px; display: flex; flex-direction: column; }
+.card { background: var(--surface); padding: 18px 20px 16px; position: relative; min-height: 90px; display: flex; flex-direction: column; transition: background 0.3s ease; }
 .card-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 9px; line-height: 1.4; }
 .card-value { font-family: var(--mono); font-size: 20px; font-weight: 400; letter-spacing: -0.01em; line-height: 1.1; margin-bottom: 5px; }
 .card-source { font-family: var(--mono); font-size: 8px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-top: auto; padding-top: 12px; }
@@ -95,6 +135,7 @@ footer { border-top: 1.5px solid var(--text); padding: 18px 32px; display: flex;
   .card-value { font-size: 18px; }
   .header-left { border-right: none; padding-right: 0; }
   .header-meta { padding-left: 0; border-top: 1px solid var(--border); width: 100%; padding-top: 12px; }
+  .theme-toggle { position: absolute; top: 12px; right: 16px; border: none; padding: 8px; }
 }
 </style>
 </head>
@@ -110,6 +151,22 @@ footer { border-top: 1.5px solid var(--text); padding: 18px 32px; display: flex;
     <div class="meta-item">Refreshed<span id="hdr-time">—</span></div>
     <div class="meta-item">Categories<span id="hdr-cats">—</span></div>
     <div class="meta-item">Data points<span id="hdr-pts">—</span></div>
+  </div>
+  <div class="theme-toggle" onclick="toggleTheme()" title="Toggle dark mode">
+    <svg class="moon-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <svg class="sun-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="5" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="12" y1="1" x2="12" y2="3" stroke-linecap="round"/>
+      <line x1="12" y1="21" x2="12" y2="23" stroke-linecap="round"/>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke-linecap="round"/>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke-linecap="round"/>
+      <line x1="1" y1="12" x2="3" y2="12" stroke-linecap="round"/>
+      <line x1="21" y1="12" x2="23" y2="12" stroke-linecap="round"/>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke-linecap="round"/>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke-linecap="round"/>
+    </svg>
   </div>
 </header>
 
@@ -132,6 +189,27 @@ footer { border-top: 1.5px solid var(--text); padding: 18px 32px; display: flex;
 </footer>
 
 <script>
+// Theme management
+function getPreferredTheme() {
+  const stored = localStorage.getItem('theme');
+  if (stored) return stored;
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+
+function setTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('theme', theme);
+}
+
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme') || 'light';
+  setTheme(current === 'dark' ? 'light' : 'dark');
+}
+
+// Initialize theme immediately to prevent flash
+setTheme(getPreferredTheme());
+
+// Utility
 function escapeHtml(text) {
   const div = document.createElement('div');
   div.textContent = text;
@@ -145,26 +223,38 @@ function renderData() {
       return response.json();
     })
     .then(data => {
-      // Header Stats
-      const dateStr = data.last_updated.replace(' UTC', '');
-      const dateObj = new Date(dateStr + ' UTC');
-      document.getElementById('hdr-date').textContent = dateObj.toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
-      document.getElementById('hdr-time').textContent = dateObj.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit', timeZoneName:'short'});
+      // Parse ISO 8601 date
+      const dateObj = new Date(data.last_updated);
+      
+      if (!isNaN(dateObj.getTime())) {
+        document.getElementById('hdr-date').textContent = dateObj.toLocaleDateString('en-US', {
+          month: 'long', 
+          day: 'numeric', 
+          year: 'numeric'
+        });
+        document.getElementById('hdr-time').textContent = dateObj.toLocaleTimeString('en-US', {
+          hour: '2-digit',
+          minute: '2-digit',
+          timeZoneName: 'short'
+        });
+      } else {
+        document.getElementById('hdr-date').textContent = '—';
+        document.getElementById('hdr-time').textContent = '—';
+      }
+      
       document.getElementById('hdr-cats').textContent = data.categories.length;
       
       let totalPoints = 0;
       data.categories.forEach(cat => totalPoints += cat.items.length);
       document.getElementById('hdr-pts').textContent = totalPoints;
 
-      // Render Ticker - Only if we have valid trending data
+      // Render Ticker
       if (data.trending && data.trending.length > 0) {
-        // Filter out any error items
         const validTrending = data.trending.filter(item => 
           item.value && !item.value.includes('Unavailable') && !item.value.includes('Offline')
         );
         
         if (validTrending.length > 0) {
-          // Duplicate for seamless loop
           const tickerItems = [...validTrending, ...validTrending, ...validTrending];
           document.getElementById('ticker-track').innerHTML = tickerItems.map((item, i) => {
             const valueHtml = item.url 
