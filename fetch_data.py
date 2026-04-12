@@ -123,7 +123,7 @@ except Exception as e:
 
 # --- 3. BUILD COMPREHENSIVE DATABASE ---
 website_data = {
-    "last_updated": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC"),
+    "last_updated": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
     "trending": trending_data,
     "categories": [
         {
