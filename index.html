@@ -25,11 +25,15 @@ header { border-bottom: 1.5px solid var(--text); padding: 0 32px; display: flex;
 .meta-item span { display: block; color: var(--text); font-weight: 500; margin-top: 2px; }
 
 /* TICKER */
-.ticker-wrap { overflow: hidden; height: 30px; display: flex; align-items: center; background: var(--text); color: var(--bg); }
+.ticker-wrap { overflow: hidden; height: 32px; display: flex; align-items: center; background: var(--text); color: var(--bg); }
 .ticker-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; padding: 0 14px; border-right: 1px solid rgba(255,255,255,0.15); white-space: nowrap; flex-shrink: 0; opacity: 0.7; }
-.ticker-track { display: flex; animation: ticker 40s linear infinite; white-space: nowrap; }
-.ticker-item { font-family: var(--mono); font-size: 10px; padding: 0 24px; letter-spacing: 0.03em; }
-.ticker-item .tlabel { opacity: 0.45; margin-right: 5px; font-size: 9px; }
+.ticker-track { display: flex; animation: ticker 50s linear infinite; white-space: nowrap; }
+.ticker-track:hover { animation-play-state: paused; }
+.ticker-item { font-family: var(--mono); font-size: 10px; padding: 0 28px; letter-spacing: 0.03em; display: flex; align-items: center; gap: 6px; }
+.ticker-item .tlabel { opacity: 0.5; font-size: 9px; text-transform: uppercase; letter-spacing: 0.06em; }
+.ticker-item a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.25); }
+.ticker-item a:hover { border-bottom-color: rgba(255,255,255,0.6); }
+.ticker-sep { opacity: 0.2; padding: 0 8px; }
 @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
 /* LAYOUT */
@@ -46,16 +50,24 @@ main { padding: 28px 32px; max-width: 1500px; margin: 0 auto; }
 .g4 { grid-template-columns: repeat(4, 1fr); }
 .g5 { grid-template-columns: repeat(5, 1fr); }
 
-.card { background: var(--surface); padding: 18px 20px 16px; position: relative; min-height: 86px; display: flex; flex-direction: column; }
+.card { background: var(--surface); padding: 18px 20px 16px; position: relative; min-height: 90px; display: flex; flex-direction: column; }
 .card-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 9px; line-height: 1.4; }
-.card-value { font-family: var(--mono); font-size: 20px; font-weight: 400; letter-spacing: -0.01em; line-height: 1; margin-bottom: 5px; }
-.card-source { font-family: var(--mono); font-size: 8px; color: var(--text-muted); opacity: 0.45; text-transform: uppercase; letter-spacing: 0.06em; margin-top: auto; padding-top: 12px; }
-.card-source a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.15s, opacity 0.15s; }
-.card-source a:hover { opacity: 1; border-bottom-color: var(--text-muted); }
+.card-value { font-family: var(--mono); font-size: 20px; font-weight: 400; letter-spacing: -0.01em; line-height: 1.1; margin-bottom: 5px; }
+.card-source { font-family: var(--mono); font-size: 8px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-top: auto; padding-top: 12px; }
+.card-source a { 
+  color: var(--text-muted); 
+  text-decoration: none; 
+  border-bottom: 1px solid var(--border);
+  transition: all 0.15s ease;
+}
+.card-source a:hover { 
+  color: var(--text); 
+  border-bottom-color: var(--text);
+}
 
 /* FOOTER */
 footer { border-top: 1.5px solid var(--text); padding: 18px 32px; display: flex; align-items: center; justify-content: space-between; margin-top: 36px; }
-.footer-note { font-family: var(--mono); font-size: 9px; color: var(--text-muted); letter-spacing: 0.04em; }
+.footer-note { font-family: var(--mono); font-size: 9px; color: var(--text-muted); letter-spacing: 0.04em; max-width: 60%; line-height: 1.5; }
 #status { font-family: var(--mono); font-size: 9px; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
 .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--text-muted); flex-shrink: 0; }
 .dot.loading { background: var(--amber); animation: blink 0.8s ease-in-out infinite; }
@@ -63,9 +75,27 @@ footer { border-top: 1.5px solid var(--text); padding: 18px 32px; display: flex;
 .dot.error { background: var(--red); }
 
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.25} }
-@media(max-width:1100px){ .g5{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(2,1fr)} }
-@media(max-width:700px){ .g5,.g4{grid-template-columns:repeat(2,1fr)} main{padding:20px} header{padding:0 20px;flex-wrap:wrap} .section-sources{display:none} }
-@media(max-width:480px){ .g5,.g4{grid-template-columns:1fr} }
+
+/* RESPONSIVE */
+@media(max-width:1100px){ 
+  .g5{grid-template-columns:repeat(3,1fr)} 
+  .g4{grid-template-columns:repeat(2,1fr)} 
+}
+@media(max-width:700px){ 
+  .g5,.g4{grid-template-columns:repeat(2,1fr)} 
+  main{padding:20px} 
+  header{padding:0 20px;flex-wrap:wrap} 
+  .section-sources{display:none}
+  .header-meta { gap: 20px; flex-wrap: wrap; }
+  footer { flex-direction: column; gap: 12px; text-align: center; }
+  .footer-note { max-width: 100%; }
+}
+@media(max-width:480px){ 
+  .g5,.g4{grid-template-columns:1fr} 
+  .card-value { font-size: 18px; }
+  .header-left { border-right: none; padding-right: 0; }
+  .header-meta { padding-left: 0; border-top: 1px solid var(--border); width: 100%; padding-top: 12px; }
+}
 </style>
 </head>
 <body>
@@ -86,85 +116,113 @@ footer { border-top: 1.5px solid var(--text); padding: 18px 32px; display: flex;
 <div class="ticker-wrap">
   <div class="ticker-label">Currently #1</div>
   <div style="overflow:hidden;flex:1"><div class="ticker-track" id="ticker-track">
-    <span class="ticker-item">Awaiting live trend data...</span>
+    <span class="ticker-item">Loading rankings...</span>
   </div></div>
 </div>
 
 <main id="main-content">
-    <div style="padding: 40px; font-family: var(--mono); font-size: 12px; color: var(--text-muted);">
-        Awaiting automated data payload...
-    </div>
+  <div style="padding: 40px; font-family: var(--mono); font-size: 12px; color: var(--text-muted); text-align: center;">
+    Awaiting automated data payload...
+  </div>
 </main>
 
 <footer>
-  <div class="footer-note">All figures are averages, medians, or statistical means. Pipeline automated daily.</div>
+  <div class="footer-note">All figures are averages, medians, or statistical means from vetted government and institutional sources. Click any source to verify. Pipeline automated daily via GitHub Actions.</div>
   <div id="status"><div class="dot loading" id="status-dot"></div><span id="status-text">Fetching data...</span></div>
 </footer>
 
 <script>
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
 function renderData() {
-    fetch('data.json')
-        .then(response => {
-            if (!response.ok) throw new Error('Failed to load data file');
-            return response.json();
-        })
-        .then(data => {
-            // Header Stats
-            const dateObj = new Date(data.last_updated);
-            document.getElementById('hdr-date').textContent = dateObj.toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
-            document.getElementById('hdr-time').textContent = dateObj.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
-            document.getElementById('hdr-cats').textContent = data.categories.length;
-            
-            let totalPoints = 0;
-            data.categories.forEach(cat => totalPoints += cat.items.length);
-            document.getElementById('hdr-pts').textContent = totalPoints;
+  fetch('data.json')
+    .then(response => {
+      if (!response.ok) throw new Error('Failed to load data file');
+      return response.json();
+    })
+    .then(data => {
+      // Header Stats
+      const dateStr = data.last_updated.replace(' UTC', '');
+      const dateObj = new Date(dateStr + ' UTC');
+      document.getElementById('hdr-date').textContent = dateObj.toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
+      document.getElementById('hdr-time').textContent = dateObj.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit', timeZoneName:'short'});
+      document.getElementById('hdr-cats').textContent = data.categories.length;
+      
+      let totalPoints = 0;
+      data.categories.forEach(cat => totalPoints += cat.items.length);
+      document.getElementById('hdr-pts').textContent = totalPoints;
 
-            // Render Ticker
-            if (data.trending && data.trending.length > 0) {
-                const tickerItems = [...data.trending, ...data.trending, ...data.trending]; 
-                document.getElementById('ticker-track').innerHTML = tickerItems.map(item => `
-                    <span class="ticker-item"><span class="tlabel">${item.label}</span>${item.value}</span>
-                `).join('');
-            }
+      // Render Ticker - Only if we have valid trending data
+      if (data.trending && data.trending.length > 0) {
+        // Filter out any error items
+        const validTrending = data.trending.filter(item => 
+          item.value && !item.value.includes('Unavailable') && !item.value.includes('Offline')
+        );
+        
+        if (validTrending.length > 0) {
+          // Duplicate for seamless loop
+          const tickerItems = [...validTrending, ...validTrending, ...validTrending];
+          document.getElementById('ticker-track').innerHTML = tickerItems.map((item, i) => {
+            const valueHtml = item.url 
+              ? `<a href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${escapeHtml(item.value)}</a>`
+              : escapeHtml(item.value);
+            const sep = (i < tickerItems.length - 1) ? '<span class="ticker-sep">•</span>' : '';
+            return `<span class="ticker-item"><span class="tlabel">${escapeHtml(item.label)}:</span>${valueHtml}</span>${sep}`;
+          }).join('');
+        } else {
+          document.getElementById('ticker-track').innerHTML = '<span class="ticker-item">Rankings temporarily unavailable</span>';
+        }
+      }
 
-            // Render Grids
-            const mainContent = document.getElementById('main-content');
-            mainContent.innerHTML = ''; 
+      // Render Category Grids
+      const mainContent = document.getElementById('main-content');
+      mainContent.innerHTML = ''; 
 
-            data.categories.forEach(category => {
-                let numCols = category.items.length === 4 ? 4 : 5; 
-                
-                const sectionHTML = `
-                    <div class="section-header">
-                      <div class="section-title">${category.title}</div>
-                      <div class="section-meta">${category.meta}</div>
-                      <div class="section-sources">${category.sources}</div>
-                    </div>
-                    <div class="grid g${numCols}">
-                        ${category.items.map(item => `
-                            <div class="card">
-                                <div class="card-label">${item.name}</div>
-                                <div class="card-value">${item.value}</div>
-                                <div class="card-source">${
-                                    item.url
-                                        ? `<a href="${item.url}" target="_blank" rel="noopener">${item.source}</a>`
-                                        : item.source
-                                }</div>
-                            </div>
-                        `).join('')}
-                    </div>
-                `;
-                mainContent.insertAdjacentHTML('beforeend', sectionHTML);
-            });
+      data.categories.forEach(category => {
+        const numItems = category.items.length;
+        let gridClass = numItems <= 4 ? 'g4' : 'g5';
+        
+        const sectionHTML = `
+          <div class="section-header">
+            <div class="section-title">${escapeHtml(category.title)}</div>
+            <div class="section-meta">${escapeHtml(category.meta)}</div>
+            <div class="section-sources">${escapeHtml(category.sources)}</div>
+          </div>
+          <div class="grid ${gridClass}">
+            ${category.items.map(item => {
+              const sourceHtml = item.url 
+                ? `<a href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${escapeHtml(item.source)}</a>`
+                : escapeHtml(item.source);
+              return `
+                <div class="card">
+                  <div class="card-label">${escapeHtml(item.name)}</div>
+                  <div class="card-value">${escapeHtml(item.value)}</div>
+                  <div class="card-source">${sourceHtml}</div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        `;
+        mainContent.insertAdjacentHTML('beforeend', sectionHTML);
+      });
 
-            document.getElementById('status-dot').className = 'dot done';
-            document.getElementById('status-text').textContent = 'Live data loaded';
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            document.getElementById('status-dot').className = 'dot error';
-            document.getElementById('status-text').textContent = 'Error loading data';
-        });
+      document.getElementById('status-dot').className = 'dot done';
+      document.getElementById('status-text').textContent = 'Live data loaded';
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      document.getElementById('status-dot').className = 'dot error';
+      document.getElementById('status-text').textContent = 'Error loading data';
+      document.getElementById('main-content').innerHTML = `
+        <div style="padding: 40px; font-family: var(--mono); font-size: 12px; color: var(--red); text-align: center;">
+          Failed to load data. Please refresh or try again later.
+        </div>
+      `;
+    });
 }
 
 renderData();
