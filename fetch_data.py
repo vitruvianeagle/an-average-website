@@ -1,183 +1,382 @@
 import json
 import urllib.request
 import xml.etree.ElementTree as ET
-from datetime import datetime
+from datetime import datetime, timezone
 
-# --- 1. LIVE TICKER DATA FETCHING ---
+# --- CONFIGURATION ---
+HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
+
+def fetch_json(url):
+    """Fetch and parse JSON from URL."""
+    req = urllib.request.Request(url, headers=HEADERS)
+    response = urllib.request.urlopen(req, timeout=10)
+    return json.loads(response.read())
+
+def fetch_xml(url):
+    """Fetch and parse XML from URL."""
+    req = urllib.request.Request(url, headers=HEADERS)
+    response = urllib.request.urlopen(req, timeout=10)
+    return ET.fromstring(response.read())
+
+# --- 1. LIVE TICKER DATA: Verified #1 Rankings ---
 trending_data = []
 
-# Fetch #1 iTunes Song
+# iTunes #1 Song (US)
 try:
-    url = "https://itunes.apple.com/us/rss/topsongs/limit=1/json"
-    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-    response = urllib.request.urlopen(req)
-    data = json.loads(response.read())
+    data = fetch_json("https://itunes.apple.com/us/rss/topsongs/limit=1/json")
     entry = data['feed']['entry'][0]
-    song_name = entry['im:name']['label']
+    song = entry['im:name']['label']
     artist = entry['im:artist']['label']
-    trending_data.append({"label": f"iTunes #1 - {artist}", "value": song_name})
-except:
-    trending_data.append({"label": "iTunes #1", "value": "Data Unavailable"})
+    trending_data.append({
+        "label": "iTunes #1 Song",
+        "value": f"{song} — {artist}",
+        "url": entry['link'][0]['attributes']['href']
+    })
+except Exception as e:
+    print(f"iTunes Songs error: {e}")
 
-# Fetch #1 NYT Fiction Bestseller
+# iTunes #1 Podcast (US)
 try:
-    url = "https://rss.nytimes.com/services/xml/rss/nyt/Books.xml"
-    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-    response = urllib.request.urlopen(req)
-    xml_data = response.read()
-    root = ET.fromstring(xml_data)
-    top_book = root.find('.//item/title').text.replace("Review: ", "")
-    trending_data.append({"label": "NYT Books", "value": top_book})
-except:
-    trending_data.append({"label": "NYT Books", "value": "Data Unavailable"})
+    data = fetch_json("https://itunes.apple.com/us/rss/toppodcasts/limit=1/json")
+    entry = data['feed']['entry'][0]
+    podcast = entry['im:name']['label']
+    trending_data.append({
+        "label": "iTunes #1 Podcast",
+        "value": podcast,
+        "url": entry['link'][0]['attributes']['href']
+    })
+except Exception as e:
+    print(f"iTunes Podcasts error: {e}")
 
-# --- 2. LIVE CATEGORY DATA FETCHING ---
+# iTunes #1 Free App (US)
 try:
-    url = "https://blockchain.info/ticker"
-    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-    response = urllib.request.urlopen(req)
-    api_data = json.loads(response.read())
-    btc_price = f"${api_data['USD']['last']:,.2f}"
-except:
-    btc_price = "API Offline"
+    data = fetch_json("https://itunes.apple.com/us/rss/topfreeapplications/limit=1/json")
+    entry = data['feed']['entry'][0]
+    app = entry['im:name']['label']
+    trending_data.append({
+        "label": "iTunes #1 Free App",
+        "value": app,
+        "url": entry['link'][0]['attributes']['href']
+    })
+except Exception as e:
+    print(f"iTunes Apps error: {e}")
 
-# --- 3. BUILD THE DATABASE STRUCTURE ---
+# iTunes #1 Album (US)
+try:
+    data = fetch_json("https://itunes.apple.com/us/rss/topalbums/limit=1/json")
+    entry = data['feed']['entry'][0]
+    album = entry['im:name']['label']
+    artist = entry['im:artist']['label']
+    trending_data.append({
+        "label": "iTunes #1 Album",
+        "value": f"{album} — {artist}",
+        "url": entry['link'][0]['attributes']['href']
+    })
+except Exception as e:
+    print(f"iTunes Albums error: {e}")
+
+# --- 2. LIVE MARKET DATA ---
+btc_price = "API Offline"
+btc_url = "https://blockchain.info/ticker"
+try:
+    data = fetch_json(btc_url)
+    btc_price = f"${data['USD']['last']:,.2f}"
+except Exception as e:
+    print(f"Bitcoin error: {e}")
+
+# --- 3. BUILD COMPREHENSIVE DATABASE ---
 website_data = {
-    "last_updated": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+    "last_updated": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC"),
     "trending": trending_data,
     "categories": [
         {
             "title": "Wages & Income",
-            "meta": "US averages, most recent period",
-            "sources": "BLS · Federal Reserve · Census Bureau",
+            "meta": "US averages, most recent annual data",
+            "sources": "Bureau of Labor Statistics · Census Bureau · Federal Reserve",
             "items": [
-                {"name": "Median Household Income", "value": "$80,610", "source": "Census Bureau",
-                 "url": "https://www.census.gov/library/publications/2024/demo/p60-282.html"},
-                {"name": "Avg Hourly Earnings", "value": "$34.28", "source": "BLS",
-                 "url": "https://www.bls.gov/news.release/empsit.t19.htm"},
-                {"name": "Avg Weekly Earnings", "value": "$1,170", "source": "BLS",
-                 "url": "https://www.bls.gov/news.release/empsit.t19.htm"},
-                {"name": "Avg CEO-to-Worker Pay Ratio", "value": "344:1", "source": "EPI",
-                 "url": "https://www.epi.org/publication/ceo-pay-in-2022/"},
-                {"name": "Avg Household Net Worth", "value": "$1.06M", "source": "Federal Reserve",
-                 "url": "https://www.federalreserve.gov/publications/files/scf23.pdf"}
+                {
+                    "name": "Median Household Income",
+                    "value": "$80,610",
+                    "source": "Census Bureau",
+                    "url": "https://www.census.gov/library/publications/2024/demo/p60-282.html"
+                },
+                {
+                    "name": "Average Hourly Earnings",
+                    "value": "$35.36",
+                    "source": "BLS",
+                    "url": "https://www.bls.gov/news.release/empsit.t19.htm"
+                },
+                {
+                    "name": "Average Weekly Earnings",
+                    "value": "$1,207",
+                    "source": "BLS",
+                    "url": "https://www.bls.gov/news.release/empsit.t19.htm"
+                },
+                {
+                    "name": "CEO-to-Worker Pay Ratio",
+                    "value": "344:1",
+                    "source": "EPI",
+                    "url": "https://www.epi.org/publication/ceo-pay-in-2023/"
+                },
+                {
+                    "name": "Median Household Net Worth",
+                    "value": "$192,900",
+                    "source": "Federal Reserve",
+                    "url": "https://www.federalreserve.gov/publications/files/scf23.pdf"
+                }
             ]
         },
         {
             "title": "Housing",
-            "meta": "US averages",
-            "sources": "NAR · Census · Freddie Mac · Harvard JCHS",
+            "meta": "US averages, current period",
+            "sources": "NAR · Freddie Mac · Census Bureau",
             "items": [
-                {"name": "Median Home Sale Price", "value": "$384,500", "source": "NAR",
-                 "url": "https://www.nar.realtor/research-and-statistics/housing-statistics/existing-home-sales"},
-                {"name": "Avg 30-Yr Mortgage Rate", "value": "6.8%", "source": "Freddie Mac",
-                 "url": "https://www.freddiemac.com/pmms"},
-                {"name": "Avg Monthly Rent (1BR)", "value": "$1,510", "source": "Census / Zillow",
-                 "url": "https://www.zillow.com/research/data/"},
-                {"name": "Avg Home Size (sq ft)", "value": "2,299", "source": "Census Bureau",
-                 "url": "https://www.census.gov/construction/chars/"},
-                {"name": "Avg Years to Save Down Payment", "value": "11.5", "source": "Harvard JCHS",
-                 "url": "https://www.jchs.harvard.edu/state-nations-housing-2024"}
+                {
+                    "name": "Median Home Sale Price",
+                    "value": "$407,500",
+                    "source": "NAR",
+                    "url": "https://www.nar.realtor/research-and-statistics/housing-statistics/existing-home-sales"
+                },
+                {
+                    "name": "30-Year Mortgage Rate",
+                    "value": "6.76%",
+                    "source": "Freddie Mac",
+                    "url": "https://www.freddiemac.com/pmms"
+                },
+                {
+                    "name": "Median Monthly Rent",
+                    "value": "$1,540",
+                    "source": "Census Bureau",
+                    "url": "https://www.census.gov/housing/hvs/index.html"
+                },
+                {
+                    "name": "Average Home Size",
+                    "value": "2,233 sq ft",
+                    "source": "Census Bureau",
+                    "url": "https://www.census.gov/construction/chars/"
+                },
+                {
+                    "name": "Homeownership Rate",
+                    "value": "65.6%",
+                    "source": "Census Bureau",
+                    "url": "https://www.census.gov/housing/hvs/index.html"
+                }
             ]
         },
         {
             "title": "Finance & Markets",
-            "meta": "Historical and current averages",
-            "sources": "Federal Reserve · S&P Global · BLS",
+            "meta": "Current and historical averages",
+            "sources": "Federal Reserve · S&P Global · Blockchain.info",
             "items": [
-                {"name": "S&P 500 Historical Avg Return", "value": "10.5%", "source": "S&P Global",
-                 "url": "https://www.spglobal.com/spdji/en/indices/equity/sp-500/"},
-                {"name": "Current Bitcoin Price", "value": btc_price, "source": "Blockchain.info",
-                 "url": "https://blockchain.info/ticker"},
-                {"name": "Avg US Credit Card APR", "value": "21.6%", "source": "Federal Reserve",
-                 "url": "https://www.federalreserve.gov/releases/g19/current/"},
-                {"name": "US Avg Personal Savings Rate", "value": "3.8%", "source": "BEA",
-                 "url": "https://www.bea.gov/data/income-saving/personal-saving-rate"}
+                {
+                    "name": "S&P 500 Avg Annual Return",
+                    "value": "10.5%",
+                    "source": "S&P Global",
+                    "url": "https://www.spglobal.com/spdji/en/indices/equity/sp-500/"
+                },
+                {
+                    "name": "Bitcoin Price",
+                    "value": btc_price,
+                    "source": "Blockchain.info",
+                    "url": btc_url
+                },
+                {
+                    "name": "Average Credit Card APR",
+                    "value": "21.76%",
+                    "source": "Federal Reserve",
+                    "url": "https://www.federalreserve.gov/releases/g19/current/"
+                },
+                {
+                    "name": "Personal Savings Rate",
+                    "value": "4.6%",
+                    "source": "BEA",
+                    "url": "https://www.bea.gov/data/income-saving/personal-saving-rate"
+                },
+                {
+                    "name": "Average 401(k) Balance",
+                    "value": "$125,900",
+                    "source": "Fidelity",
+                    "url": "https://www.fidelity.com/learning-center/smart-money/average-401k-balance"
+                }
             ]
         },
         {
-            "title": "Health & Healthcare",
-            "meta": "US averages, most recent period",
-            "sources": "KFF · CMS · CDC · NCHS",
+            "title": "Health & Wellness",
+            "meta": "US averages, most recent data",
+            "sources": "CDC · CMS · KFF",
             "items": [
-                {"name": "Avg Annual Health Insurance Premium", "value": "$8,435", "source": "KFF",
-                 "url": "https://www.kff.org/health-costs/report/employer-health-benefits-survey/"},
-                {"name": "Avg ER Visit Cost", "value": "$2,840", "source": "KFF",
-                 "url": "https://www.kff.org/health-costs/issue-brief/how-much-and-why-2024-mid-year-update/"},
-                {"name": "Life Expectancy", "value": "77.5 yrs", "source": "CDC / NCHS",
-                 "url": "https://www.cdc.gov/nchs/fastats/life-expectancy.htm"},
-                {"name": "Avg Annual Rx Drug Spend", "value": "$1,432", "source": "CMS",
-                 "url": "https://www.cms.gov/data-research/statistics-trends-and-reports/national-health-expenditure-data"},
-                {"name": "Avg Primary Care Visit Cost", "value": "$286", "source": "KFF",
-                 "url": "https://www.kff.org/health-costs/issue-brief/how-much-and-why-2024-mid-year-update/"}
+                {
+                    "name": "Life Expectancy",
+                    "value": "77.5 years",
+                    "source": "CDC",
+                    "url": "https://www.cdc.gov/nchs/fastats/life-expectancy.htm"
+                },
+                {
+                    "name": "Average Health Insurance Premium",
+                    "value": "$8,435/yr",
+                    "source": "KFF",
+                    "url": "https://www.kff.org/health-costs/report/employer-health-benefits-survey/"
+                },
+                {
+                    "name": "Obesity Rate (Adult)",
+                    "value": "41.9%",
+                    "source": "CDC",
+                    "url": "https://www.cdc.gov/obesity/data/adult.html"
+                },
+                {
+                    "name": "Average Sleep Duration",
+                    "value": "6.8 hours",
+                    "source": "CDC",
+                    "url": "https://www.cdc.gov/sleep/data-and-statistics/adults.html"
+                },
+                {
+                    "name": "Uninsured Rate",
+                    "value": "7.9%",
+                    "source": "Census Bureau",
+                    "url": "https://www.census.gov/library/publications/2024/demo/p60-284.html"
+                }
             ]
         },
         {
             "title": "Education",
-            "meta": "US averages, most recent academic year",
-            "sources": "College Board · Federal Reserve · NCES · NEA",
+            "meta": "US averages, current academic year",
+            "sources": "NCES · College Board · Federal Reserve",
             "items": [
-                {"name": "Avg Annual Tuition (4-Yr Public)", "value": "$11,260", "source": "College Board",
-                 "url": "https://research.collegeboard.org/trends/college-pricing"},
-                {"name": "Avg Student Loan Debt", "value": "$37,850", "source": "Federal Reserve",
-                 "url": "https://www.newyorkfed.org/microeconomics/hhdc"},
-                {"name": "Avg Monthly Student Loan Payment", "value": "$393", "source": "BLS",
-                 "url": "https://www.bls.gov/cex/tables.htm"},
-                {"name": "Avg Public School Teacher Salary", "value": "$69,544", "source": "NEA",
-                 "url": "https://www.nea.org/resource-library/educator-pay-and-student-spending"},
-                {"name": "Avg Years to Repay Student Loans", "value": "20", "source": "Federal Reserve",
-                 "url": "https://www.federalreserve.gov/publications/economic-well-being-of-us-households.htm"}
-            ]
-        },
-        {
-            "title": "Food & Cost of Living",
-            "meta": "US averages, per household",
-            "sources": "USDA · BLS · NRA",
-            "items": [
-                {"name": "Avg Monthly Grocery Spend", "value": "$537", "source": "BLS",
-                 "url": "https://www.bls.gov/cex/tables.htm"},
-                {"name": "Avg Restaurant Meal Cost", "value": "$15.50", "source": "NRA",
-                 "url": "https://restaurant.org/research-and-media/research/research-reports/"},
-                {"name": "Avg Daily Caloric Intake", "value": "2,140", "source": "USDA",
-                 "url": "https://www.ars.usda.gov/northeast-area/beltsville-md-bhnrc/beltsville-human-nutrition-research-center/food-surveys-research-group/"},
-                {"name": "Avg Monthly Utility Bill", "value": "$429", "source": "BLS",
-                 "url": "https://www.bls.gov/cex/tables.htm"},
-                {"name": "Avg Annual Household Food Waste", "value": "325 lbs", "source": "USDA",
-                 "url": "https://www.usda.gov/topics/food-and-nutrition/food-loss-and-waste"}
+                {
+                    "name": "Average Public College Tuition",
+                    "value": "$11,260/yr",
+                    "source": "College Board",
+                    "url": "https://research.collegeboard.org/trends/college-pricing"
+                },
+                {
+                    "name": "Average Private College Tuition",
+                    "value": "$43,350/yr",
+                    "source": "College Board",
+                    "url": "https://research.collegeboard.org/trends/college-pricing"
+                },
+                {
+                    "name": "Average Student Loan Debt",
+                    "value": "$37,850",
+                    "source": "Federal Reserve",
+                    "url": "https://www.federalreserve.gov/publications/2024-economic-well-being-of-us-households-in-2023-student-loans.htm"
+                },
+                {
+                    "name": "High School Graduation Rate",
+                    "value": "87%",
+                    "source": "NCES",
+                    "url": "https://nces.ed.gov/programs/coe/indicator/coi"
+                },
+                {
+                    "name": "Bachelor's Degree Holders",
+                    "value": "33.7%",
+                    "source": "Census Bureau",
+                    "url": "https://www.census.gov/data/tables/2023/demo/educational-attainment/cps-detailed-tables.html"
+                }
             ]
         },
         {
             "title": "Transportation",
-            "meta": "US averages",
-            "sources": "BLS · FHWA · EIA · AAA",
+            "meta": "US averages, current data",
+            "sources": "AAA · Census Bureau · DOT",
             "items": [
-                {"name": "Avg New Car Price", "value": "$48,644", "source": "BLS",
-                 "url": "https://www.bls.gov/news.release/cpi.t01.htm"},
-                {"name": "Avg Monthly Car Payment", "value": "$738", "source": "Experian",
-                 "url": "https://www.experian.com/blogs/ask-experian/research/auto-loan-debt-study/"},
-                {"name": "Avg Commute Time (One Way)", "value": "27.6 min", "source": "Census Bureau",
-                 "url": "https://www.census.gov/topics/employment/commuting.html"},
-                {"name": "Avg Gas Price (Gallon)", "value": "$3.50", "source": "EIA",
-                 "url": "https://www.eia.gov/petroleum/gasdiesel/"},
-                {"name": "Avg Annual Car Insurance", "value": "$2,314", "source": "NAIC",
-                 "url": "https://content.naic.org/research-topics/auto-insurance"}
+                {
+                    "name": "Average Commute Time",
+                    "value": "26.8 min",
+                    "source": "Census Bureau",
+                    "url": "https://www.census.gov/topics/employment/commuting.html"
+                },
+                {
+                    "name": "Average Gas Price",
+                    "value": "$3.22/gal",
+                    "source": "AAA",
+                    "url": "https://gasprices.aaa.com/"
+                },
+                {
+                    "name": "Average New Car Price",
+                    "value": "$48,644",
+                    "source": "Kelley Blue Book",
+                    "url": "https://www.coxautoinc.com/market-insights/"
+                },
+                {
+                    "name": "Average Miles Driven/Year",
+                    "value": "14,263",
+                    "source": "DOT",
+                    "url": "https://www.fhwa.dot.gov/policyinformation/statistics.cfm"
+                },
+                {
+                    "name": "Remote Work Rate",
+                    "value": "28.2%",
+                    "source": "Census Bureau",
+                    "url": "https://www.census.gov/newsroom/press-releases/2024/working-from-home.html"
+                }
             ]
         },
         {
-            "title": "Technology & Internet",
-            "meta": "US averages",
-            "sources": "FCC · Pew · BLS",
+            "title": "Demographics",
+            "meta": "US population statistics",
+            "sources": "Census Bureau",
             "items": [
-                {"name": "Avg Monthly Internet Bill", "value": "$75", "source": "FCC",
-                 "url": "https://www.fcc.gov/reports-research/reports/broadband-progress-reports"},
-                {"name": "Avg Daily Screen Time", "value": "7h 04m", "source": "eMarketer",
-                 "url": "https://www.emarketer.com/content/us-time-spent-with-media-2024"},
-                {"name": "Avg Smartphone Cost", "value": "$738", "source": "Counterpoint",
-                 "url": "https://www.counterpointresearch.com/insight/us-smartphone-market"},
-                {"name": "Avg Monthly Streaming Spend", "value": "$61", "source": "Deloitte",
-                 "url": "https://www.deloitte.com/us/en/insights/industry/technology/digital-media-trends.html"},
-                {"name": "Avg Home Download Speed", "value": "242 Mbps", "source": "FCC",
-                 "url": "https://www.fcc.gov/reports-research/reports/measuring-broadband-america"}
+                {
+                    "name": "US Population",
+                    "value": "336.0M",
+                    "source": "Census Bureau",
+                    "url": "https://www.census.gov/popclock/"
+                },
+                {
+                    "name": "Median Age",
+                    "value": "38.9 years",
+                    "source": "Census Bureau",
+                    "url": "https://www.census.gov/quickfacts/"
+                },
+                {
+                    "name": "Average Household Size",
+                    "value": "2.51",
+                    "source": "Census Bureau",
+                    "url": "https://www.census.gov/data/tables/time-series/demo/families/households.html"
+                },
+                {
+                    "name": "Marriage Rate",
+                    "value": "6.0 per 1k",
+                    "source": "CDC",
+                    "url": "https://www.cdc.gov/nchs/nvss/marriage-divorce.htm"
+                },
+                {
+                    "name": "Birth Rate",
+                    "value": "10.9 per 1k",
+                    "source": "CDC",
+                    "url": "https://www.cdc.gov/nchs/fastats/births.htm"
+                }
+            ]
+        },
+        {
+            "title": "Environment",
+            "meta": "US and global metrics",
+            "sources": "EPA · NOAA · EIA",
+            "items": [
+                {
+                    "name": "US CO₂ Emissions Per Capita",
+                    "value": "13.0 tons/yr",
+                    "source": "EPA",
+                    "url": "https://www.epa.gov/ghgemissions/inventory-us-greenhouse-gas-emissions-and-sinks"
+                },
+                {
+                    "name": "Global Avg Temperature Anomaly",
+                    "value": "+1.18°C",
+                    "source": "NOAA",
+                    "url": "https://www.climate.gov/news-features/understanding-climate/climate-change-global-temperature"
+                },
+                {
+                    "name": "Renewable Energy Share",
+                    "value": "21.4%",
+                    "source": "EIA",
+                    "url": "https://www.eia.gov/energyexplained/renewable-sources/"
+                },
+                {
+                    "name": "Average Daily Water Use",
+                    "value": "82 gal",
+                    "source": "EPA",
+                    "url": "https://www.epa.gov/watersense/how-we-use-water"
+                }
             ]
         }
     ]
@@ -185,4 +384,10 @@ website_data = {
 
 # --- 4. SAVE TO JSON ---
 with open('data.json', 'w') as f:
-    json.dump(website_data, f, indent=4)
+    json.dump(website_data, f, indent=2)
+
+print(f"Data updated: {website_data['last_updated']}")
+print(f"Trending items: {len(trending_data)}")
+print(f"Categories: {len(website_data['categories'])}")
+total_items = sum(len(cat['items']) for cat in website_data['categories'])
+print(f"Total data points: {total_items}")
