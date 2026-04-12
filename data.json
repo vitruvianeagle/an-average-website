@@ -1,6 +1,27 @@
 {
-  "last_updated": "2026-04-12 01:58:40 UTC",
-  "trending": [],
+  "last_updated": "2026-04-12 02:12:34 UTC",
+  "trending": [
+    {
+      "label": "Billboard #1",
+      "value": "Gains in Weekly Performance \u2014 Ella Langley",
+      "url": "https://www.billboard.com/charts/hot-100/"
+    },
+    {
+      "label": "Box Office #1",
+      "value": "The Super Mario Galaxy Movie",
+      "url": "https://www.boxofficemojo.com/release/rl3344662529/?ref_=bo_wly_table_1"
+    },
+    {
+      "label": "Strongest Currency",
+      "value": "CLF (1 = $44.29)",
+      "url": "https://www.xe.com/currency/clf/"
+    },
+    {
+      "label": "Google Trending #1",
+      "value": "connor zilisch",
+      "url": "https://trends.google.com/trending?geo=US"
+    }
+  ],
   "categories": [
     {
       "title": "Wages & Income",
@@ -89,7 +110,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$71,547.66",
+          "value": "$71,789.75",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
