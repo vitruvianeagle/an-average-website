@@ -6,7 +6,7 @@ from datetime import datetime
 # --- 1. LIVE TICKER DATA FETCHING ---
 trending_data = []
 
-# Fetch #1 iTunes Song (using Apple's public RSS feed)
+# Fetch #1 iTunes Song
 try:
     url = "https://itunes.apple.com/us/rss/topsongs/limit=1/json"
     req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
@@ -19,22 +19,19 @@ try:
 except:
     trending_data.append({"label": "iTunes #1", "value": "Data Unavailable"})
 
-# Fetch #1 NYT Fiction Bestseller (using NYT public RSS)
+# Fetch #1 NYT Fiction Bestseller
 try:
     url = "https://rss.nytimes.com/services/xml/rss/nyt/Books.xml"
     req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
     response = urllib.request.urlopen(req)
     xml_data = response.read()
     root = ET.fromstring(xml_data)
-    # The first item is usually the top review or list update
     top_book = root.find('.//item/title').text.replace("Review: ", "")
     trending_data.append({"label": "NYT Books", "value": top_book})
 except:
     trending_data.append({"label": "NYT Books", "value": "Data Unavailable"})
 
-
 # --- 2. LIVE CATEGORY DATA FETCHING ---
-# Fetch Live Bitcoin Price
 try:
     url = "https://blockchain.info/ticker"
     req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
@@ -47,18 +44,23 @@ except:
 # --- 3. BUILD THE DATABASE STRUCTURE ---
 website_data = {
     "last_updated": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-    "trending": trending_data, # <--- This now uses our live fetched data
+    "trending": trending_data,
     "categories": [
         {
             "title": "Wages & Income",
             "meta": "US averages, most recent period",
             "sources": "BLS · Federal Reserve · Census Bureau",
             "items": [
-                {"name": "Median Household Income", "value": "$80,610", "source": "Census Bureau"},
-                {"name": "Avg Hourly Earnings", "value": "$34.28", "source": "BLS"},
-                {"name": "Avg Weekly Earnings", "value": "$1,170", "source": "BLS"},
-                {"name": "Avg CEO-to-Worker Pay Ratio", "value": "344:1", "source": "EPI"},
-                {"name": "Avg Household Net Worth", "value": "$1.06M", "source": "Federal Reserve"}
+                {"name": "Median Household Income", "value": "$80,610", "source": "Census Bureau",
+                 "url": "https://www.census.gov/library/publications/2024/demo/p60-282.html"},
+                {"name": "Avg Hourly Earnings", "value": "$34.28", "source": "BLS",
+                 "url": "https://www.bls.gov/news.release/empsit.t19.htm"},
+                {"name": "Avg Weekly Earnings", "value": "$1,170", "source": "BLS",
+                 "url": "https://www.bls.gov/news.release/empsit.t19.htm"},
+                {"name": "Avg CEO-to-Worker Pay Ratio", "value": "344:1", "source": "EPI",
+                 "url": "https://www.epi.org/publication/ceo-pay-in-2022/"},
+                {"name": "Avg Household Net Worth", "value": "$1.06M", "source": "Federal Reserve",
+                 "url": "https://www.federalreserve.gov/publications/files/scf23.pdf"}
             ]
         },
         {
@@ -66,34 +68,16 @@ website_data = {
             "meta": "US averages",
             "sources": "NAR · Census · Freddie Mac · Harvard JCHS",
             "items": [
-                {"name": "Median Home Sale Price", "value": "$384,500", "source": "NAR"},
-                {"name": "Avg 30-Yr Mortgage Rate", "value": "6.8%", "source": "Freddie Mac"},
-                {"name": "Avg Monthly Rent (1BR)", "value": "$1,510", "source": "Census / Zillow"},
-                {"name": "Avg Home Size (sq ft)", "value": "2,299", "source": "Census Bureau"},
-                {"name": "Avg Years to Save Down Payment", "value": "11.5", "source": "Harvard JCHS"}
-            ]
-        },
-        {
-            "title": "Health & Medicine",
-            "meta": "US & global averages",
-            "sources": "CDC · WHO · Kaiser Family Foundation",
-            "items": [
-                {"name": "US Life Expectancy", "value": "77.5 yrs", "source": "CDC / NCHS"},
-                {"name": "Avg Annual Healthcare Cost", "value": "$13,493", "source": "CMS"},
-                {"name": "Avg Employer Health Premium", "value": "$23,968", "source": "KFF"},
-                {"name": "Avg Nightly Sleep (US Adults)", "value": "6.8 hrs", "source": "CDC / Gallup"},
-                {"name": "Avg BMI (US Adults)", "value": "29.6", "source": "CDC / NHANES"}
-            ]
-        },
-        {
-            "title": "Education",
-            "meta": "US averages",
-            "sources": "NCES · College Board · Fed Reserve",
-            "items": [
-                {"name": "Avg Student Loan Debt", "value": "$37,574", "source": "Federal Reserve"},
-                {"name": "Avg Public College Tuition", "value": "$11,260", "source": "College Board"},
-                {"name": "Avg Private College Tuition", "value": "$41,540", "source": "College Board"},
-                {"name": "Avg K-12 Per-Pupil Spending", "value": "$14,347", "source": "NCES"}
+                {"name": "Median Home Sale Price", "value": "$384,500", "source": "NAR",
+                 "url": "https://www.nar.realtor/research-and-statistics/housing-statistics/existing-home-sales"},
+                {"name": "Avg 30-Yr Mortgage Rate", "value": "6.8%", "source": "Freddie Mac",
+                 "url": "https://www.freddiemac.com/pmms"},
+                {"name": "Avg Monthly Rent (1BR)", "value": "$1,510", "source": "Census / Zillow",
+                 "url": "https://www.zillow.com/research/data/"},
+                {"name": "Avg Home Size (sq ft)", "value": "2,299", "source": "Census Bureau",
+                 "url": "https://www.census.gov/construction/chars/"},
+                {"name": "Avg Years to Save Down Payment", "value": "11.5", "source": "Harvard JCHS",
+                 "url": "https://www.jchs.harvard.edu/state-nations-housing-2024"}
             ]
         },
         {
@@ -101,11 +85,99 @@ website_data = {
             "meta": "Historical and current averages",
             "sources": "Federal Reserve · S&P Global · BLS",
             "items": [
-                {"name": "S&P 500 Historical Avg Return", "value": "10.5%", "source": "S&P Global"},
-                {"name": "Current Bitcoin Price", "value": btc_price, "source": "Blockchain.info"},
-                {"name": "Avg US Credit Card APR", "value": "21.6%", "source": "Federal Reserve"},
-                {"name": "Avg US Credit Card Debt", "value": "$6,501", "source": "Federal Reserve"},
-                {"name": "US Avg Personal Savings Rate", "value": "3.8%", "source": "BEA"}
+                {"name": "S&P 500 Historical Avg Return", "value": "10.5%", "source": "S&P Global",
+                 "url": "https://www.spglobal.com/spdji/en/indices/equity/sp-500/"},
+                {"name": "Current Bitcoin Price", "value": btc_price, "source": "Blockchain.info",
+                 "url": "https://blockchain.info/ticker"},
+                {"name": "Avg US Credit Card APR", "value": "21.6%", "source": "Federal Reserve",
+                 "url": "https://www.federalreserve.gov/releases/g19/current/"},
+                {"name": "US Avg Personal Savings Rate", "value": "3.8%", "source": "BEA",
+                 "url": "https://www.bea.gov/data/income-saving/personal-saving-rate"}
+            ]
+        },
+        {
+            "title": "Health & Healthcare",
+            "meta": "US averages, most recent period",
+            "sources": "KFF · CMS · CDC · NCHS",
+            "items": [
+                {"name": "Avg Annual Health Insurance Premium", "value": "$8,435", "source": "KFF",
+                 "url": "https://www.kff.org/health-costs/report/employer-health-benefits-survey/"},
+                {"name": "Avg ER Visit Cost", "value": "$2,840", "source": "KFF",
+                 "url": "https://www.kff.org/health-costs/issue-brief/how-much-and-why-2024-mid-year-update/"},
+                {"name": "Life Expectancy", "value": "77.5 yrs", "source": "CDC / NCHS",
+                 "url": "https://www.cdc.gov/nchs/fastats/life-expectancy.htm"},
+                {"name": "Avg Annual Rx Drug Spend", "value": "$1,432", "source": "CMS",
+                 "url": "https://www.cms.gov/data-research/statistics-trends-and-reports/national-health-expenditure-data"},
+                {"name": "Avg Primary Care Visit Cost", "value": "$286", "source": "KFF",
+                 "url": "https://www.kff.org/health-costs/issue-brief/how-much-and-why-2024-mid-year-update/"}
+            ]
+        },
+        {
+            "title": "Education",
+            "meta": "US averages, most recent academic year",
+            "sources": "College Board · Federal Reserve · NCES · NEA",
+            "items": [
+                {"name": "Avg Annual Tuition (4-Yr Public)", "value": "$11,260", "source": "College Board",
+                 "url": "https://research.collegeboard.org/trends/college-pricing"},
+                {"name": "Avg Student Loan Debt", "value": "$37,850", "source": "Federal Reserve",
+                 "url": "https://www.newyorkfed.org/microeconomics/hhdc"},
+                {"name": "Avg Monthly Student Loan Payment", "value": "$393", "source": "BLS",
+                 "url": "https://www.bls.gov/cex/tables.htm"},
+                {"name": "Avg Public School Teacher Salary", "value": "$69,544", "source": "NEA",
+                 "url": "https://www.nea.org/resource-library/educator-pay-and-student-spending"},
+                {"name": "Avg Years to Repay Student Loans", "value": "20", "source": "Federal Reserve",
+                 "url": "https://www.federalreserve.gov/publications/economic-well-being-of-us-households.htm"}
+            ]
+        },
+        {
+            "title": "Food & Cost of Living",
+            "meta": "US averages, per household",
+            "sources": "USDA · BLS · NRA",
+            "items": [
+                {"name": "Avg Monthly Grocery Spend", "value": "$537", "source": "BLS",
+                 "url": "https://www.bls.gov/cex/tables.htm"},
+                {"name": "Avg Restaurant Meal Cost", "value": "$15.50", "source": "NRA",
+                 "url": "https://restaurant.org/research-and-media/research/research-reports/"},
+                {"name": "Avg Daily Caloric Intake", "value": "2,140", "source": "USDA",
+                 "url": "https://www.ars.usda.gov/northeast-area/beltsville-md-bhnrc/beltsville-human-nutrition-research-center/food-surveys-research-group/"},
+                {"name": "Avg Monthly Utility Bill", "value": "$429", "source": "BLS",
+                 "url": "https://www.bls.gov/cex/tables.htm"},
+                {"name": "Avg Annual Household Food Waste", "value": "325 lbs", "source": "USDA",
+                 "url": "https://www.usda.gov/topics/food-and-nutrition/food-loss-and-waste"}
+            ]
+        },
+        {
+            "title": "Transportation",
+            "meta": "US averages",
+            "sources": "BLS · FHWA · EIA · AAA",
+            "items": [
+                {"name": "Avg New Car Price", "value": "$48,644", "source": "BLS",
+                 "url": "https://www.bls.gov/news.release/cpi.t01.htm"},
+                {"name": "Avg Monthly Car Payment", "value": "$738", "source": "Experian",
+                 "url": "https://www.experian.com/blogs/ask-experian/research/auto-loan-debt-study/"},
+                {"name": "Avg Commute Time (One Way)", "value": "27.6 min", "source": "Census Bureau",
+                 "url": "https://www.census.gov/topics/employment/commuting.html"},
+                {"name": "Avg Gas Price (Gallon)", "value": "$3.50", "source": "EIA",
+                 "url": "https://www.eia.gov/petroleum/gasdiesel/"},
+                {"name": "Avg Annual Car Insurance", "value": "$2,314", "source": "NAIC",
+                 "url": "https://content.naic.org/research-topics/auto-insurance"}
+            ]
+        },
+        {
+            "title": "Technology & Internet",
+            "meta": "US averages",
+            "sources": "FCC · Pew · BLS",
+            "items": [
+                {"name": "Avg Monthly Internet Bill", "value": "$75", "source": "FCC",
+                 "url": "https://www.fcc.gov/reports-research/reports/broadband-progress-reports"},
+                {"name": "Avg Daily Screen Time", "value": "7h 04m", "source": "eMarketer",
+                 "url": "https://www.emarketer.com/content/us-time-spent-with-media-2024"},
+                {"name": "Avg Smartphone Cost", "value": "$738", "source": "Counterpoint",
+                 "url": "https://www.counterpointresearch.com/insight/us-smartphone-market"},
+                {"name": "Avg Monthly Streaming Spend", "value": "$61", "source": "Deloitte",
+                 "url": "https://www.deloitte.com/us/en/insights/industry/technology/digital-media-trends.html"},
+                {"name": "Avg Home Download Speed", "value": "242 Mbps", "source": "FCC",
+                 "url": "https://www.fcc.gov/reports-research/reports/measuring-broadband-america"}
             ]
         }
     ]
