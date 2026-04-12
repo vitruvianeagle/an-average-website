@@ -1,79 +1,116 @@
 import json
 import urllib.request
-import xml.etree.ElementTree as ET
+import re
 from datetime import datetime, timezone
 
 # --- CONFIGURATION ---
-HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
+HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'}
+
+def fetch_url(url):
+    """Fetch raw content from URL."""
+    req = urllib.request.Request(url, headers=HEADERS)
+    response = urllib.request.urlopen(req, timeout=15)
+    return response.read().decode('utf-8')
 
 def fetch_json(url):
     """Fetch and parse JSON from URL."""
-    req = urllib.request.Request(url, headers=HEADERS)
-    response = urllib.request.urlopen(req, timeout=10)
-    return json.loads(response.read())
-
-def fetch_xml(url):
-    """Fetch and parse XML from URL."""
-    req = urllib.request.Request(url, headers=HEADERS)
-    response = urllib.request.urlopen(req, timeout=10)
-    return ET.fromstring(response.read())
+    return json.loads(fetch_url(url))
 
 # --- 1. LIVE TICKER DATA: Verified #1 Rankings ---
 trending_data = []
 
-# iTunes #1 Song (US)
+# Billboard Hot 100 #1
 try:
-    data = fetch_json("https://itunes.apple.com/us/rss/topsongs/limit=1/json")
-    entry = data['feed']['entry'][0]
-    song = entry['im:name']['label']
-    artist = entry['im:artist']['label']
-    trending_data.append({
-        "label": "iTunes #1 Song",
-        "value": f"{song} — {artist}",
-        "url": entry['link'][0]['attributes']['href']
-    })
+    html = fetch_url("https://www.billboard.com/charts/hot-100/")
+    # Extract #1 song - Billboard uses specific HTML structure
+    title_match = re.search(r'<h3[^>]*id="title-of-a-story"[^>]*class="[^"]*c-title[^"]*"[^>]*>\s*([^<]+?)\s*</h3>', html)
+    artist_match = re.search(r'<span[^>]*class="[^"]*c-label[^"]*a-no-trucate[^"]*"[^>]*>\s*([^<]+?)\s*</span>', html)
+    if title_match and artist_match:
+        song = title_match.group(1).strip()
+        artist = artist_match.group(1).strip()
+        trending_data.append({
+            "label": "Billboard #1",
+            "value": f"{song} — {artist}",
+            "url": "https://www.billboard.com/charts/hot-100/"
+        })
 except Exception as e:
-    print(f"iTunes Songs error: {e}")
+    print(f"Billboard error: {e}")
 
-# iTunes #1 Podcast (US)
+# Global Box Office #1 (Box Office Mojo)
 try:
-    data = fetch_json("https://itunes.apple.com/us/rss/toppodcasts/limit=1/json")
-    entry = data['feed']['entry'][0]
-    podcast = entry['im:name']['label']
-    trending_data.append({
-        "label": "iTunes #1 Podcast",
-        "value": podcast,
-        "url": entry['link'][0]['attributes']['href']
-    })
+    html = fetch_url("https://www.boxofficemojo.com/weekly/")
+    # Find first movie title in the weekly chart
+    match = re.search(r'<a[^>]*href="(/release/[^"]+)"[^>]*>([^<]+)</a>', html)
+    if match:
+        movie_url = "https://www.boxofficemojo.com" + match.group(1)
+        movie = match.group(2).strip()
+        trending_data.append({
+            "label": "Box Office #1",
+            "value": movie,
+            "url": movie_url
+        })
 except Exception as e:
-    print(f"iTunes Podcasts error: {e}")
+    print(f"Box Office error: {e}")
 
-# iTunes #1 Free App (US)
+# Strongest Currency (vs USD)
 try:
-    data = fetch_json("https://itunes.apple.com/us/rss/topfreeapplications/limit=1/json")
-    entry = data['feed']['entry'][0]
-    app = entry['im:name']['label']
-    trending_data.append({
-        "label": "iTunes #1 Free App",
-        "value": app,
-        "url": entry['link'][0]['attributes']['href']
-    })
+    # Using exchangerate-api.com free tier (or similar)
+    data = fetch_json("https://open.er-api.com/v6/latest/USD")
+    if data.get('rates'):
+        # Find currency with lowest rate (meaning 1 unit = most USD)
+        rates = data['rates']
+        # Filter to major currencies and find strongest
+        strongest = min(rates.items(), key=lambda x: x[1])
+        currency_names = {
+            'KWD': 'Kuwaiti Dinar',
+            'BHD': 'Bahraini Dinar', 
+            'OMR': 'Omani Rial',
+            'JOD': 'Jordanian Dinar',
+            'GBP': 'British Pound',
+            'EUR': 'Euro',
+            'CHF': 'Swiss Franc'
+        }
+        code = strongest[0]
+        rate = strongest[1]
+        name = currency_names.get(code, code)
+        usd_value = 1 / rate
+        trending_data.append({
+            "label": "Strongest Currency",
+            "value": f"{name} (1 = ${usd_value:.2f})",
+            "url": "https://www.xe.com/currency/" + code.lower() + "/"
+        })
 except Exception as e:
-    print(f"iTunes Apps error: {e}")
+    print(f"Currency error: {e}")
 
-# iTunes #1 Album (US)
+# #1 Selling Book (iTunes/Apple Books)
 try:
-    data = fetch_json("https://itunes.apple.com/us/rss/topalbums/limit=1/json")
+    data = fetch_json("https://itunes.apple.com/us/rss/toppaidebooks/limit=1/json")
     entry = data['feed']['entry'][0]
-    album = entry['im:name']['label']
-    artist = entry['im:artist']['label']
+    book = entry['im:name']['label']
+    author = entry['im:artist']['label']
+    book_url = entry['link'][0]['attributes']['href']
     trending_data.append({
-        "label": "iTunes #1 Album",
-        "value": f"{album} — {artist}",
-        "url": entry['link'][0]['attributes']['href']
+        "label": "#1 Selling Book",
+        "value": f"{book} — {author}",
+        "url": book_url
     })
 except Exception as e:
-    print(f"iTunes Albums error: {e}")
+    print(f"Books error: {e}")
+
+# Google Trends #1 (Daily trending search - US)
+try:
+    xml = fetch_url("https://trends.google.com/trending/rss?geo=US")
+    # Parse the RSS feed for first item
+    title_match = re.search(r'<item>\s*<title>([^<]+)</title>', xml)
+    if title_match:
+        trend = title_match.group(1).strip()
+        trending_data.append({
+            "label": "Google Trending #1",
+            "value": trend,
+            "url": "https://trends.google.com/trending?geo=US"
+        })
+except Exception as e:
+    print(f"Google Trends error: {e}")
 
 # --- 2. LIVE MARKET DATA ---
 btc_price = "API Offline"
@@ -388,6 +425,8 @@ with open('data.json', 'w') as f:
 
 print(f"Data updated: {website_data['last_updated']}")
 print(f"Trending items: {len(trending_data)}")
+for item in trending_data:
+    print(f"  • {item['label']}: {item['value'][:50]}...")
 print(f"Categories: {len(website_data['categories'])}")
 total_items = sum(len(cat['items']) for cat in website_data['categories'])
 print(f"Total data points: {total_items}")
