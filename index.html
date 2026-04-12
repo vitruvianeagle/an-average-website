@@ -50,6 +50,8 @@ main { padding: 28px 32px; max-width: 1500px; margin: 0 auto; }
 .card-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 9px; line-height: 1.4; }
 .card-value { font-family: var(--mono); font-size: 20px; font-weight: 400; letter-spacing: -0.01em; line-height: 1; margin-bottom: 5px; }
 .card-source { font-family: var(--mono); font-size: 8px; color: var(--text-muted); opacity: 0.45; text-transform: uppercase; letter-spacing: 0.06em; margin-top: auto; padding-top: 12px; }
+.card-source a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.15s, opacity 0.15s; }
+.card-source a:hover { opacity: 1; border-bottom-color: var(--text-muted); }
 
 /* FOOTER */
 footer { border-top: 1.5px solid var(--text); padding: 18px 32px; display: flex; align-items: center; justify-content: space-between; margin-top: 36px; }
@@ -119,7 +121,6 @@ function renderData() {
 
             // Render Ticker
             if (data.trending && data.trending.length > 0) {
-                // Double the items so the CSS marquee animation loops seamlessly
                 const tickerItems = [...data.trending, ...data.trending, ...data.trending]; 
                 document.getElementById('ticker-track').innerHTML = tickerItems.map(item => `
                     <span class="ticker-item"><span class="tlabel">${item.label}</span>${item.value}</span>
@@ -131,7 +132,7 @@ function renderData() {
             mainContent.innerHTML = ''; 
 
             data.categories.forEach(category => {
-                let numCols = category.items.length === 4 ? 4 : 5; // Matches g4 or g5 classes from original CSS
+                let numCols = category.items.length === 4 ? 4 : 5; 
                 
                 const sectionHTML = `
                     <div class="section-header">
@@ -144,7 +145,11 @@ function renderData() {
                             <div class="card">
                                 <div class="card-label">${item.name}</div>
                                 <div class="card-value">${item.value}</div>
-                                <div class="card-source">${item.source}</div>
+                                <div class="card-source">${
+                                    item.url
+                                        ? `<a href="${item.url}" target="_blank" rel="noopener">${item.source}</a>`
+                                        : item.source
+                                }</div>
                             </div>
                         `).join('')}
                     </div>
