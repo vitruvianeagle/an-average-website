@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-01T07:52:40Z",
+  "last_updated": "2026-05-02T06:30:46Z",
   "trending": [
     {
       "label": "Billboard #1",
@@ -8,17 +8,17 @@
     },
     {
       "label": "Box Office #1",
-      "value": "The Super Mario Galaxy Movie",
-      "url": "https://www.boxofficemojo.com/release/rl3344662529/?ref_=bo_wly_table_1"
+      "value": "Michael",
+      "url": "https://www.boxofficemojo.com/release/rl1246593025/?ref_=bo_wly_table_1"
     },
     {
       "label": "Strongest Currency",
-      "value": "CLF (1 = $43.50)",
+      "value": "CLF (1 = $43.54)",
       "url": "https://www.xe.com/currency/clf/"
     },
     {
       "label": "Google Trending #1",
-      "value": "disneyland ticket prices",
+      "value": "internet",
       "url": "https://trends.google.com/trending?geo=US"
     }
   ],
@@ -110,7 +110,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$77,102.99",
+          "value": "$78,149.68",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
