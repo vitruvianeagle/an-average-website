@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-09T07:22:38Z",
+  "last_updated": "2026-05-10T07:48:01Z",
   "trending": [
     {
       "label": "Billboard #1",
@@ -12,13 +12,8 @@
       "url": "https://www.boxofficemojo.com/release/rl365461505/?ref_=bo_wly_table_1"
     },
     {
-      "label": "Strongest Currency",
-      "value": "CLF (1 = $44.24)",
-      "url": "https://www.xe.com/currency/clf/"
-    },
-    {
       "label": "Google Trending #1",
-      "value": "san andreas fault",
+      "value": "riot",
       "url": "https://trends.google.com/trending?geo=US"
     }
   ],
@@ -110,7 +105,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$80,219.95",
+          "value": "$80,757.96",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
