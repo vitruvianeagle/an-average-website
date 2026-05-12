@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-11T11:46:17Z",
+  "last_updated": "2026-05-12T01:59:58Z",
   "trending": [
     {
       "label": "Billboard #1",
@@ -13,7 +13,7 @@
     },
     {
       "label": "Google Trending #1",
-      "value": "josh johnson",
+      "value": "cavs",
       "url": "https://trends.google.com/trending?geo=US"
     }
   ],
@@ -105,7 +105,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$81,135.30",
+          "value": "$81,172.81",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
