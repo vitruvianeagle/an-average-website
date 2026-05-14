@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-13T02:04:57Z",
+  "last_updated": "2026-05-14T02:07:16Z",
   "trending": [
     {
       "label": "Billboard #1",
@@ -13,7 +13,7 @@
     },
     {
       "label": "Google Trending #1",
-      "value": "arike ogunbowale",
+      "value": "mike tirico",
       "url": "https://trends.google.com/trending?geo=US"
     }
   ],
@@ -105,7 +105,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$80,939.45",
+          "value": "$79,602.77",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
