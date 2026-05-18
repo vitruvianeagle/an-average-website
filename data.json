@@ -1,11 +1,6 @@
 {
-  "last_updated": "2026-05-17T01:59:54Z",
+  "last_updated": "2026-05-18T02:12:01Z",
   "trending": [
-    {
-      "label": "Billboard #1",
-      "value": "Gains in Weekly Performance \u2014 Ella Langley",
-      "url": "https://www.billboard.com/charts/hot-100/"
-    },
     {
       "label": "Box Office #1",
       "value": "The Devil Wears Prada 2",
@@ -13,12 +8,12 @@
     },
     {
       "label": "Strongest Currency",
-      "value": "CLF (1 = $44.30)",
+      "value": "CLF (1 = $43.90)",
       "url": "https://www.xe.com/currency/clf/"
     },
     {
       "label": "Google Trending #1",
-      "value": "luke weaver",
+      "value": "kane brown",
       "url": "https://trends.google.com/trending?geo=US"
     }
   ],
@@ -110,7 +105,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$77,707.53",
+          "value": "$77,098.47",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
