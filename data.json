@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-22T02:12:25Z",
+  "last_updated": "2026-05-23T01:59:24Z",
   "trending": [
     {
       "label": "Billboard #1",
@@ -8,17 +8,17 @@
     },
     {
       "label": "Box Office #1",
-      "value": "The Devil Wears Prada 2",
-      "url": "https://www.boxofficemojo.com/release/rl365461505/?ref_=bo_wly_table_1"
+      "value": "Michael",
+      "url": "https://www.boxofficemojo.com/release/rl1246593025/?ref_=bo_wly_table_1"
     },
     {
       "label": "Strongest Currency",
-      "value": "CLF (1 = $43.98)",
+      "value": "CLF (1 = $43.93)",
       "url": "https://www.xe.com/currency/clf/"
     },
     {
       "label": "Google Trending #1",
-      "value": "tony brothers",
+      "value": "sun vs storm",
       "url": "https://trends.google.com/trending?geo=US"
     }
   ],
@@ -110,7 +110,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$77,589.64",
+          "value": "$75,404.47",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
