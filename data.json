@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-29T02:06:00Z",
+  "last_updated": "2026-05-30T02:00:54Z",
   "trending": [
     {
       "label": "Billboard #1",
@@ -8,17 +8,17 @@
     },
     {
       "label": "Box Office #1",
-      "value": "Michael",
-      "url": "https://www.boxofficemojo.com/release/rl1246593025/?ref_=bo_wly_table_1"
+      "value": "Star Wars: The Mandalorian and Grogu",
+      "url": "https://www.boxofficemojo.com/release/rl3294527489/?ref_=bo_wly_table_1"
     },
     {
       "label": "Strongest Currency",
-      "value": "CLF (1 = $44.17)",
+      "value": "CLF (1 = $44.32)",
       "url": "https://www.xe.com/currency/clf/"
     },
     {
       "label": "Google Trending #1",
-      "value": "nebraska softball",
+      "value": "pittsburgh pirates",
       "url": "https://trends.google.com/trending?geo=US"
     }
   ],
@@ -110,7 +110,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$73,526.58",
+          "value": "$73,562.31",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
