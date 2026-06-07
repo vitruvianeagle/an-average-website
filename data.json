@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-06-06T02:04:54Z",
+  "last_updated": "2026-06-07T02:31:25Z",
   "trending": [
     {
       "label": "Billboard #1",
@@ -18,7 +18,7 @@
     },
     {
       "label": "Google Trending #1",
-      "value": "billy bob thornton",
+      "value": "mets - padres",
       "url": "https://trends.google.com/trending?geo=US"
     }
   ],
@@ -110,7 +110,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$60,959.17",
+          "value": "$61,209.42",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
