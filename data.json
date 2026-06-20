@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-06-19T02:53:09Z",
+  "last_updated": "2026-06-20T02:14:14Z",
   "trending": [
     {
       "label": "Billboard #1",
@@ -8,17 +8,17 @@
     },
     {
       "label": "Box Office #1",
-      "value": "Scary Movie",
-      "url": "https://www.boxofficemojo.com/release/rl4163403777/?ref_=bo_wly_table_1"
+      "value": "Disclosure Day",
+      "url": "https://www.boxofficemojo.com/release/rl376274945/?ref_=bo_wly_table_1"
     },
     {
       "label": "Strongest Currency",
-      "value": "CLF (1 = $44.38)",
+      "value": "CLF (1 = $43.93)",
       "url": "https://www.xe.com/currency/clf/"
     },
     {
       "label": "Google Trending #1",
-      "value": "how long is the world cup",
+      "value": "gabriel martinelli",
       "url": "https://trends.google.com/trending?geo=US"
     }
   ],
@@ -110,7 +110,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$62,908.96",
+          "value": "$63,430.55",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
