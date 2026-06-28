@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-06-27T02:07:09Z",
+  "last_updated": "2026-06-28T02:28:51Z",
   "trending": [
     {
       "label": "Billboard #1",
@@ -18,7 +18,7 @@
     },
     {
       "label": "Google Trending #1",
-      "value": "ferran torres",
+      "value": "julian alvarez",
       "url": "https://trends.google.com/trending?geo=US"
     }
   ],
@@ -110,7 +110,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$59,891.70",
+          "value": "$60,003.33",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
