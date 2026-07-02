@@ -1,11 +1,6 @@
 {
-  "last_updated": "2026-07-01T02:29:46Z",
+  "last_updated": "2026-07-02T02:09:23Z",
   "trending": [
-    {
-      "label": "Billboard #1",
-      "value": "Gains in Weekly Performance \u2014 Stella Lefty",
-      "url": "https://www.billboard.com/charts/hot-100/"
-    },
     {
       "label": "Box Office #1",
       "value": "Toy Story 5",
@@ -13,12 +8,12 @@
     },
     {
       "label": "Strongest Currency",
-      "value": "CLF (1 = $42.83)",
+      "value": "CLF (1 = $42.86)",
       "url": "https://www.xe.com/currency/clf/"
     },
     {
       "label": "Google Trending #1",
-      "value": "fifa president",
+      "value": "ricardo pepi",
       "url": "https://trends.google.com/trending?geo=US"
     }
   ],
@@ -110,7 +105,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$58,905.86",
+          "value": "$60,072.93",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
