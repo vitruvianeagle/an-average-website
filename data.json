@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-07-03T01:53:27Z",
+  "last_updated": "2026-07-04T01:52:33Z",
   "trending": [
     {
       "label": "Billboard #1",
@@ -8,17 +8,17 @@
     },
     {
       "label": "Box Office #1",
-      "value": "Disclosure Day",
-      "url": "https://www.boxofficemojo.com/release/rl376274945/?ref_=bo_wly_table_1"
+      "value": "Toy Story 5",
+      "url": "https://www.boxofficemojo.com/release/rl3344859137/?ref_=bo_wly_table_1"
     },
     {
       "label": "Strongest Currency",
-      "value": "CLF (1 = $42.73)",
+      "value": "CLF (1 = $42.71)",
       "url": "https://www.xe.com/currency/clf/"
     },
     {
       "label": "Google Trending #1",
-      "value": "fifa world cup 2026\u2122",
+      "value": "james rodriguez",
       "url": "https://trends.google.com/trending?geo=US"
     }
   ],
@@ -110,7 +110,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$61,549.43",
+          "value": "$62,386.28",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
