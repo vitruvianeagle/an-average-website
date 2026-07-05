@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-07-04T01:52:33Z",
+  "last_updated": "2026-07-05T01:59:47Z",
   "trending": [
     {
       "label": "Billboard #1",
@@ -18,7 +18,7 @@
     },
     {
       "label": "Google Trending #1",
-      "value": "james rodriguez",
+      "value": "tiempo",
       "url": "https://trends.google.com/trending?geo=US"
     }
   ],
@@ -110,7 +110,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$62,386.28",
+          "value": "$62,833.82",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
