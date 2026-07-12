@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-07-11T01:41:23Z",
+  "last_updated": "2026-07-12T01:43:04Z",
   "trending": [
     {
       "label": "Billboard #1",
@@ -18,7 +18,7 @@
     },
     {
       "label": "Google Trending #1",
-      "value": "diamondbacks vs dodgers",
+      "value": "kamaru usman",
       "url": "https://trends.google.com/trending?geo=US"
     }
   ],
@@ -110,7 +110,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$64,015.87",
+          "value": "$64,108.24",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
