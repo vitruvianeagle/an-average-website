@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-07-13T01:45:58Z",
+  "last_updated": "2026-07-14T01:22:42Z",
   "trending": [
     {
       "label": "Billboard #1",
@@ -13,12 +13,12 @@
     },
     {
       "label": "Strongest Currency",
-      "value": "CLF (1 = $42.69)",
+      "value": "CLF (1 = $42.71)",
       "url": "https://www.xe.com/currency/clf/"
     },
     {
       "label": "Google Trending #1",
-      "value": "lisa leslie",
+      "value": "cody bellinger",
       "url": "https://trends.google.com/trending?geo=US"
     }
   ],
@@ -110,7 +110,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$63,662.52",
+          "value": "$62,449.76",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
