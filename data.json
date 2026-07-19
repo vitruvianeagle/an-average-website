@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-07-18T01:23:46Z",
+  "last_updated": "2026-07-19T01:29:52Z",
   "trending": [
     {
       "label": "Billboard #1",
@@ -18,7 +18,7 @@
     },
     {
       "label": "Google Trending #1",
-      "value": "aaron donald",
+      "value": "lisa leslie",
       "url": "https://trends.google.com/trending?geo=US"
     }
   ],
@@ -110,7 +110,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$63,902.12",
+          "value": "$64,731.18",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
