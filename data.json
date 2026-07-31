@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-07-30T01:21:09Z",
+  "last_updated": "2026-07-31T01:48:09Z",
   "trending": [
     {
       "label": "Billboard #1",
@@ -8,17 +8,17 @@
     },
     {
       "label": "Box Office #1",
-      "value": "The Odyssey",
-      "url": "https://www.boxofficemojo.com/release/rl170295297/?ref_=bo_wly_table_1"
+      "value": "Hundreds of Beavers",
+      "url": "https://www.boxofficemojo.com/release/rl2655879169/?ref_=bo_wly_table_1"
     },
     {
       "label": "Strongest Currency",
-      "value": "CLF (1 = $42.32)",
+      "value": "CLF (1 = $42.35)",
       "url": "https://www.xe.com/currency/clf/"
     },
     {
       "label": "Google Trending #1",
-      "value": "eclipse solar",
+      "value": "tobey maguire",
       "url": "https://trends.google.com/trending?geo=US"
     }
   ],
@@ -110,7 +110,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$63,650.88",
+          "value": "$64,730.90",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
