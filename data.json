@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-07T02:04:13Z",
+  "last_updated": "2026-08-08T00:49:20Z",
   "trending": [
     {
       "label": "Billboard #1",
@@ -8,8 +8,8 @@
     },
     {
       "label": "Box Office #1",
-      "value": "The Odyssey",
-      "url": "https://www.boxofficemojo.com/release/rl170295297/?ref_=bo_wly_table_1"
+      "value": "Spider-Man: Brand New Day",
+      "url": "https://www.boxofficemojo.com/release/rl2299756545/?ref_=bo_wly_table_1"
     },
     {
       "label": "Strongest Currency",
@@ -18,7 +18,7 @@
     },
     {
       "label": "Google Trending #1",
-      "value": "white sox",
+      "value": "jake rogers",
       "url": "https://trends.google.com/trending?geo=US"
     }
   ],
@@ -110,7 +110,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$64,353.51",
+          "value": "$64,872.62",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
