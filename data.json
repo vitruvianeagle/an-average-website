@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-29T04:42:37Z",
+  "last_updated": "2026-08-30T02:17:07Z",
   "trending": [
     {
       "label": "Billboard #1",
@@ -18,7 +18,7 @@
     },
     {
       "label": "Google Trending #1",
-      "value": "invincible",
+      "value": "5g",
       "url": "https://trends.google.com/trending?geo=US"
     }
   ],
@@ -110,7 +110,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$77,618.14",
+          "value": "$78,044.06",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
