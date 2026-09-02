@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-01T02:31:22Z",
+  "last_updated": "2026-09-02T01:52:43Z",
   "trending": [
     {
       "label": "Billboard #1",
@@ -13,12 +13,12 @@
     },
     {
       "label": "Strongest Currency",
-      "value": "CLF (1 = $42.43)",
+      "value": "CLF (1 = $42.29)",
       "url": "https://www.xe.com/currency/clf/"
     },
     {
       "label": "Google Trending #1",
-      "value": "walker jenkins",
+      "value": "john paul miller now",
       "url": "https://trends.google.com/trending?geo=US"
     }
   ],
@@ -110,7 +110,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$78,191.64",
+          "value": "$76,742.68",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
