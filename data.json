@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-05T01:54:09Z",
+  "last_updated": "2026-09-06T01:48:39Z",
   "trending": [
     {
       "label": "Billboard #1",
@@ -18,7 +18,7 @@
     },
     {
       "label": "Google Trending #1",
-      "value": "kc current vs bay fc",
+      "value": "weeks lsu",
       "url": "https://trends.google.com/trending?geo=US"
     }
   ],
@@ -110,7 +110,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$79,607.01",
+          "value": "$79,984.05",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
