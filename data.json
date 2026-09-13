@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-12T02:02:06Z",
+  "last_updated": "2026-09-13T01:57:06Z",
   "trending": [
     {
       "label": "Billboard #1",
@@ -18,7 +18,7 @@
     },
     {
       "label": "Google Trending #1",
-      "value": "chelsea handler",
+      "value": "chris henry",
       "url": "https://trends.google.com/trending?geo=US"
     }
   ],
@@ -110,7 +110,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$77,256.15",
+          "value": "$77,275.72",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
