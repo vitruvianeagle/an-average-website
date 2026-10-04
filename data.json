@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-03T02:48:51Z",
+  "last_updated": "2026-10-04T03:18:30Z",
   "trending": [
     {
       "label": "Billboard #1",
@@ -18,7 +18,7 @@
     },
     {
       "label": "Google Trending #1",
-      "value": "taylor swift new curly hairstyle",
+      "value": "ty france",
       "url": "https://trends.google.com/trending?geo=US"
     }
   ],
@@ -110,7 +110,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$84,633.09",
+          "value": "$84,794.40",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
