@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-09T03:33:32Z",
+  "last_updated": "2026-10-10T03:14:06Z",
   "trending": [
     {
       "label": "Billboard #1",
@@ -8,17 +8,17 @@
     },
     {
       "label": "Box Office #1",
-      "value": "Resident Evil",
-      "url": "https://www.boxofficemojo.com/release/rl3744759809/?ref_=bo_wly_table_1"
+      "value": "Verity",
+      "url": "https://www.boxofficemojo.com/release/rl2486730753/?ref_=bo_wly_table_1"
     },
     {
       "label": "Strongest Currency",
-      "value": "CLF (1 = $40.44)",
+      "value": "CLF (1 = $40.39)",
       "url": "https://www.xe.com/currency/clf/"
     },
     {
       "label": "Google Trending #1",
-      "value": "lakers",
+      "value": "george clooney",
       "url": "https://trends.google.com/trending?geo=US"
     }
   ],
@@ -110,7 +110,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$82,129.74",
+          "value": "$82,515.64",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
