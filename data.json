@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-10T03:14:06Z",
+  "last_updated": "2026-10-11T02:46:45Z",
   "trending": [
     {
       "label": "Billboard #1",
@@ -18,7 +18,7 @@
     },
     {
       "label": "Google Trending #1",
-      "value": "george clooney",
+      "value": "nhl standings",
       "url": "https://trends.google.com/trending?geo=US"
     }
   ],
@@ -110,7 +110,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$82,515.64",
+          "value": "$83,047.42",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
