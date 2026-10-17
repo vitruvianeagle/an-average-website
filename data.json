@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-16T02:07:40Z",
+  "last_updated": "2026-10-17T02:01:20Z",
   "trending": [
     {
       "label": "Billboard #1",
@@ -8,17 +8,17 @@
     },
     {
       "label": "Box Office #1",
-      "value": "Verity",
-      "url": "https://www.boxofficemojo.com/release/rl2486730753/?ref_=bo_wly_table_1"
+      "value": "Other Mommy",
+      "url": "https://www.boxofficemojo.com/release/rl1875148801/?ref_=bo_wly_table_1"
     },
     {
       "label": "Strongest Currency",
-      "value": "CLF (1 = $40.11)",
+      "value": "CLF (1 = $40.23)",
       "url": "https://www.xe.com/currency/clf/"
     },
     {
       "label": "Google Trending #1",
-      "value": "christian yelich",
+      "value": "victor wembanyama",
       "url": "https://trends.google.com/trending?geo=US"
     }
   ],
@@ -110,7 +110,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$81,980.16",
+          "value": "$81,414.70",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
