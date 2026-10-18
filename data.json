@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-17T02:01:20Z",
+  "last_updated": "2026-10-18T02:01:00Z",
   "trending": [
     {
       "label": "Billboard #1",
@@ -18,7 +18,7 @@
     },
     {
       "label": "Google Trending #1",
-      "value": "victor wembanyama",
+      "value": "wake forest vs california",
       "url": "https://trends.google.com/trending?geo=US"
     }
   ],
@@ -110,7 +110,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$81,414.70",
+          "value": "$81,543.81",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
