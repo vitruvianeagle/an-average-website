@@ -1,6 +1,11 @@
 {
-  "last_updated": "2026-10-26T02:12:32Z",
+  "last_updated": "2026-10-27T02:48:56Z",
   "trending": [
+    {
+      "label": "Billboard #1",
+      "value": "Gains in Weekly Performance \u2014 Stella Lefty",
+      "url": "https://www.billboard.com/charts/hot-100/"
+    },
     {
       "label": "Box Office #1",
       "value": "Street Fighter",
@@ -8,12 +13,12 @@
     },
     {
       "label": "Strongest Currency",
-      "value": "CLF (1 = $39.95)",
+      "value": "CLF (1 = $39.69)",
       "url": "https://www.xe.com/currency/clf/"
     },
     {
       "label": "Google Trending #1",
-      "value": "najee harris",
+      "value": "hunger games",
       "url": "https://trends.google.com/trending?geo=US"
     }
   ],
@@ -105,7 +110,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$79,720.94",
+          "value": "$79,809.77",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
