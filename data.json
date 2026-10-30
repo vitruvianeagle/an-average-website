@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-29T03:22:59Z",
+  "last_updated": "2026-10-30T03:24:55Z",
   "trending": [
     {
       "label": "Billboard #1",
@@ -8,17 +8,17 @@
     },
     {
       "label": "Box Office #1",
-      "value": "Street Fighter",
-      "url": "https://www.boxofficemojo.com/release/rl1752465409/?ref_=bo_wly_table_1"
+      "value": "On a String",
+      "url": "https://www.boxofficemojo.com/release/rl2118418689/?ref_=bo_wly_table_1"
     },
     {
       "label": "Strongest Currency",
-      "value": "CLF (1 = $40.13)",
+      "value": "CLF (1 = $40.02)",
       "url": "https://www.xe.com/currency/clf/"
     },
     {
       "label": "Google Trending #1",
-      "value": "milwaukee brewers",
+      "value": "airport",
       "url": "https://trends.google.com/trending?geo=US"
     }
   ],
@@ -110,7 +110,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$79,762.58",
+          "value": "$77,279.36",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
