@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-31T03:09:34Z",
+  "last_updated": "2026-11-01T03:05:27Z",
   "trending": [
     {
       "label": "Billboard #1",
@@ -18,7 +18,7 @@
     },
     {
       "label": "Google Trending #1",
-      "value": "lakers",
+      "value": "prince",
       "url": "https://trends.google.com/trending?geo=US"
     }
   ],
@@ -110,7 +110,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$77,239.70",
+          "value": "$77,593.74",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
