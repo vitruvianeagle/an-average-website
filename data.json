@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-13T03:59:18Z",
+  "last_updated": "2026-11-14T03:57:54Z",
   "trending": [
     {
       "label": "Billboard #1",
@@ -8,17 +8,17 @@
     },
     {
       "label": "Box Office #1",
-      "value": "You Can See Everything",
-      "url": "https://www.boxofficemojo.com/release/rl3025109249/?ref_=bo_wly_table_1"
+      "value": "Godzilla Minus Zero",
+      "url": "https://www.boxofficemojo.com/release/rl3834216449/?ref_=bo_wly_table_1"
     },
     {
       "label": "Strongest Currency",
-      "value": "CLF (1 = $40.18)",
+      "value": "CLF (1 = $39.84)",
       "url": "https://www.xe.com/currency/clf/"
     },
     {
       "label": "Google Trending #1",
-      "value": "christian mccaffrey",
+      "value": "norman powell",
       "url": "https://trends.google.com/trending?geo=US"
     }
   ],
@@ -110,7 +110,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$68,921.52",
+          "value": "$66,800.13",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
