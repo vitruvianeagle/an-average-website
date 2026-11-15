@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-14T03:57:54Z",
+  "last_updated": "2026-11-15T03:42:22Z",
   "trending": [
     {
       "label": "Billboard #1",
@@ -18,7 +18,7 @@
     },
     {
       "label": "Google Trending #1",
-      "value": "norman powell",
+      "value": "once upon a time in hollywood",
       "url": "https://trends.google.com/trending?geo=US"
     }
   ],
@@ -110,7 +110,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$66,800.13",
+          "value": "$64,920.28",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
