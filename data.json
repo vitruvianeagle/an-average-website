@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-15T03:42:22Z",
+  "last_updated": "2026-11-17T05:38:38Z",
   "trending": [
     {
       "label": "Billboard #1",
@@ -13,12 +13,12 @@
     },
     {
       "label": "Strongest Currency",
-      "value": "CLF (1 = $39.84)",
+      "value": "CLF (1 = $39.69)",
       "url": "https://www.xe.com/currency/clf/"
     },
     {
       "label": "Google Trending #1",
-      "value": "once upon a time in hollywood",
+      "value": "karely ruiz",
       "url": "https://trends.google.com/trending?geo=US"
     }
   ],
@@ -110,7 +110,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$64,920.28",
+          "value": "$64,900.81",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
