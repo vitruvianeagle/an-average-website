@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-20T04:47:31Z",
+  "last_updated": "2026-11-21T04:42:17Z",
   "trending": [
     {
       "label": "Billboard #1",
@@ -8,8 +8,8 @@
     },
     {
       "label": "Box Office #1",
-      "value": "Godzilla Minus Zero",
-      "url": "https://www.boxofficemojo.com/release/rl3834216449/?ref_=bo_wly_table_1"
+      "value": "Ebenezer",
+      "url": "https://www.boxofficemojo.com/release/rl754089985/?ref_=bo_wly_table_1"
     },
     {
       "label": "Strongest Currency",
@@ -18,7 +18,7 @@
     },
     {
       "label": "Google Trending #1",
-      "value": "ku basketball",
+      "value": "baylor vs usc",
       "url": "https://trends.google.com/trending?geo=US"
     }
   ],
@@ -110,7 +110,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$61,400.31",
+          "value": "$55,839.30",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
