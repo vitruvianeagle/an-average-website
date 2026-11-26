@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-25T05:59:20Z",
+  "last_updated": "2026-11-26T05:53:02Z",
   "trending": [
     {
       "label": "Billboard #1",
@@ -18,7 +18,7 @@
     },
     {
       "label": "Google Trending #1",
-      "value": "ben wang",
+      "value": "keldon johnson",
       "url": "https://trends.google.com/trending?geo=US"
     }
   ],
@@ -110,7 +110,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$59,107.92",
+          "value": "$60,737.94",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
