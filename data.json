@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-26T05:53:02Z",
+  "last_updated": "2026-11-27T05:46:05Z",
   "trending": [
     {
       "label": "Billboard #1",
@@ -8,17 +8,17 @@
     },
     {
       "label": "Box Office #1",
-      "value": "Ebenezer",
-      "url": "https://www.boxofficemojo.com/release/rl754089985/?ref_=bo_wly_table_3"
+      "value": "I Play Rocky",
+      "url": "https://www.boxofficemojo.com/release/rl2056355841/?ref_=bo_wly_table_3"
     },
     {
       "label": "Strongest Currency",
-      "value": "CLF (1 = $38.89)",
+      "value": "CLF (1 = $38.04)",
       "url": "https://www.xe.com/currency/clf/"
     },
     {
       "label": "Google Trending #1",
-      "value": "keldon johnson",
+      "value": "jessica biel",
       "url": "https://trends.google.com/trending?geo=US"
     }
   ],
@@ -110,7 +110,7 @@
         },
         {
           "name": "Bitcoin Price",
-          "value": "$60,737.94",
+          "value": "$61,642.19",
           "source": "Blockchain.info",
           "url": "https://blockchain.info/ticker"
         },
